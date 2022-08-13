@@ -10,37 +10,34 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
         >
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="#0e0d0e"
-            app:expandedTitleTextAppearance="@android:color/transparent"
 
-            >
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <ImageView
                 android:id="@+id/img_comida"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@null"
+
                 android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"></ImageView>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
-                ></ImageView>
-
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:title="Nombre Comida"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:layout_collapseMode="parallax"
-    ></androidx.appcompat.widget.Toolbar>
-
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></androidx.appcompat.widget.Toolbar>
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -48,79 +45,138 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCart"
-        android:src="@drawable/ic_baseline_shopping_cart_24"
-        android:backgroundTint="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:src="@drawable/ic_baseline_shopping_cart_24"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|right|end"
-        app:useCompatPadding="true"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:pressedTranslationZ="12dp"
+        app:useCompatPadding="true"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
-        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                >
+                app:cardUseCompatPadding="true">
+
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/comida_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:padding="12dp"
-                        android:text="Comida"
+                        android:text="@string/comida_name"
                         android:textColor="@color/design_default_color_primary"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TextView>
+                        android:textSize="25sp"
+                        android:textStyle="bold"></TextView>
 
                     <LinearLayout
                         android:id="@+id/layout_price"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <ImageView
-                            android:src="@drawable/ic_svgsol"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content">
-                        </ImageView>
+                            android:id="@+id/img_simbol_pen"
+                            android:layout_width="1dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:src="@drawable/ic_svgsol"></ImageView>
 
                         <TextView
                             android:id="@+id/comida_precio"
-                            android:layout_marginTop="8dp"
-                            android:padding="12dp"
-                            android:text="Precio"
-                            android:textColor="@color/design_default_color_primary"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_weight="9"
-                            android:layout_height="wrap_content"></TextView>
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+
+                            android:padding="9dp"
+                            android:textColor="@color/design_default_color_primary"
+                            android:textSize="35sp"
+                            android:textStyle="bold"
+                            tools:text="@string/comida_precio"></TextView>
+
+                        <Button
+                            android:id="@+id/buttonL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:onClick="decrementar"
+                            android:text="@string/ButtonL"
+                            android:textColor="@color/white"
+                            android:textSize="35sp" />
+
+                        <TextView
+                            android:id="@+id/textViewNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="@string/textViewNumber"
+                            android:textSize="25sp"
+                            android:layout_gravity="center"
+                            android:textColor="@color/black"
+                            tools:text="@string/textViewNumber" />
+
+                        <Button
+                            android:id="@+id/buttonR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:onClick="incrementar"
+                            android:text="@string/buttonR"
+                            android:textColor="@color/white"
+                            android:textSize="35sp"
+                             />
 
                     </LinearLayout>
 
 
-
-
                 </LinearLayout>
 
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/comida_descripcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+
+                    android:lineSpacingMultiplier="1.5"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    tools:text="@string/comida_descripcion">
+
+                </TextView>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 

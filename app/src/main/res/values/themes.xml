@@ -22,4 +22,16 @@
     <style name="Theme.ProyectoFinal.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ProyectoFinal.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CollaspedAppbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ExpandedAppbar" parent="@android:style/TextAppearance.Material.Title">
+        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
