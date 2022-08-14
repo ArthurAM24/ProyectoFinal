@@ -31,9 +31,14 @@
     <string name="comida_name">None</string>
     <string name="comida_descripcion">Descripción</string>
     <string name="comida_desc"> </string>
-
+    <string name="ImgDesc"> </string>
+    <string name="app_bar_layout"> </string>
     <string name="ButtonL">-</string>
     <string name="buttonR">+</string>
 
-    <string name="textViewNumber">0</string>
+
+    <string name="textViewNumber">1</string>
+
+    <string name="TextTotal">Total: </string>
+    <string name="btn_confirm">Confirmar Orden </string>
 </resources>

@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofinal.Common.Common;
+import com.example.proyectofinal.Database.Database;
 import com.example.proyectofinal.Modelo.Comida;
+import com.example.proyectofinal.Modelo.Pedido;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +29,11 @@ public class ComidaDetalle extends AppCompatActivity {
 
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton btnCarrito;
-    TextView valor;
+    TextView Cantidad;
     int contador = 0;
 
     String comidaID = "";
+
     FirebaseDatabase database;
     DatabaseReference comidas;
 
@@ -42,8 +45,7 @@ public class ComidaDetalle extends AppCompatActivity {
         setContentView(R.layout.activity_comida_detalle);
 
         //BUTTONS
-
-        valor = (TextView) findViewById(R.id.textViewNumber);
+        Cantidad = (TextView) findViewById(R.id.textViewNumber);
 
         //FIREBASE
         database = FirebaseDatabase.getInstance();
@@ -52,6 +54,23 @@ public class ComidaDetalle extends AppCompatActivity {
         //INICIO VIEW
 
         btnCarrito = (FloatingActionButton) findViewById(R.id.btnCart);
+        btnCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new Database(getBaseContext()).agregarAlCarrito(new Pedido(
+                        comidaID,
+                        comidaActual.getNombre(),
+                        Cantidad.getText().toString(),
+                        comidaActual.getPrecio(),
+                        comidaActual.getDescuento()
+
+                ));
+                Toast.makeText(ComidaDetalle.this, "Agregado Al carrito", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         comida_descripcion = (TextView) findViewById(R.id.comida_descripcion);
         comida_nombre = (TextView) findViewById(R.id.comida_name);
         comida_precio = (TextView) findViewById(R.id.comida_precio);
@@ -62,7 +81,7 @@ public class ComidaDetalle extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollaspedAppbar);
 
-        //get comida
+        //obtener comida
         if (getIntent() != null)
             comidaID = getIntent().getStringExtra("ComidasId");
         if (!comidaID.isEmpty()) {
@@ -78,16 +97,15 @@ public class ComidaDetalle extends AppCompatActivity {
 
     public void incrementar(View view) {
         contador++;
-        valor.setText(""+ contador);
-
+        Cantidad.setText("" + contador);
     }
 
     public void decrementar(View view) {
-        if (contador <= 0) {
-            contador = 0;
+        if (contador <= 1) {
+            contador = 1;
         } else {
             contador--;
-            valor.setText("" + contador);
+            Cantidad.setText("" + contador);
         }
 
     }

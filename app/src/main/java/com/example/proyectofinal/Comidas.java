@@ -36,7 +36,7 @@ public class Comidas extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         comidaList=database.getReference("Comidas");
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_food);
+        recyclerView = findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -53,7 +53,7 @@ public class Comidas extends AppCompatActivity {
             else
             {
                 Toast.makeText(Comidas.this,"Porfavor Revise su conexión!",Toast.LENGTH_SHORT).show();
-                return;
+
             }
         }
 
@@ -62,7 +62,7 @@ public class Comidas extends AppCompatActivity {
     private void cargarListaComidas(String categoriaID) {
         adapter= new FirebaseRecyclerAdapter<Comida, ComidaViewHolder>(Comida.class,R.layout.comidas_item,ComidaViewHolder.class,
                 comidaList.orderByChild("MenuID").equalTo(categoriaID)) {
-            
+
             protected void populateViewHolder(ComidaViewHolder comidaViewHolder, Comida comida, int i) {
             comidaViewHolder.Comida_Nombre.setText(comida.getNombre());
                 Picasso.with(getBaseContext()).load(comida.getImage()).into(comidaViewHolder.Comida_Imagen);

@@ -62,7 +62,8 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent carritoInten = new Intent(Inicio.this, Carrito.class);
+                startActivity(carritoInten);
             }
         });
 
@@ -99,29 +100,29 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
     private void loadMenu() {
 
-       adapter =
-                new FirebaseRecyclerAdapter<Categoria, MenuViewHolder>(Categoria.class,R.layout.menu_item,MenuViewHolder.class,category) {
-            @Override
-            protected void populateViewHolder(MenuViewHolder menuViewHolder, Categoria model, int i) {
-            menuViewHolder.Menu_Nombre.setText(model.getNombre());
-
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(menuViewHolder.Menu_Imagen);
-
-                Categoria clickItem = model;
-
-                menuViewHolder.setItemClickListener(new ItemClickListener() {
+        adapter =
+                new FirebaseRecyclerAdapter<Categoria, MenuViewHolder>(Categoria.class, R.layout.menu_item, MenuViewHolder.class, category) {
                     @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        //Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
-                        //Obtiene categoria y lo ennvia a la otra actividad
-                        Intent comidaLista = new Intent(Inicio.this,Comidas.class);
-                        comidaLista.putExtra("CategoriaID",adapter.getRef(position).getKey());
-                        startActivity(comidaLista);
+                    protected void populateViewHolder(MenuViewHolder menuViewHolder, Categoria model, int i) {
+                        menuViewHolder.Menu_Nombre.setText(model.getNombre());
+
+                        Picasso.with(getBaseContext()).load(model.getImage())
+                                .into(menuViewHolder.Menu_Imagen);
+
+                        Categoria clickItem = model;
+
+                        menuViewHolder.setItemClickListener(new ItemClickListener() {
+                            @Override
+                            public void onClick(View view, int position, boolean isLongClick) {
+                                //Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
+                                //Obtiene categoria y lo ennvia a la otra actividad
+                                Intent comidaLista = new Intent(Inicio.this, Comidas.class);
+                                comidaLista.putExtra("CategoriaID", adapter.getRef(position).getKey());
+                                startActivity(comidaLista);
+                            }
+                        });
                     }
-                });
-            }
-        };
+                };
         recycler_menu.setAdapter(adapter);
 
     }
@@ -166,7 +167,10 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         } else if (id == R.id.nav_log_out) {
 
-
+            //Logout
+            Intent signIn = new Intent(Inicio.this,MainActivity.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

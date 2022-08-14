@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtCel = (EditText) findViewById(R.id.txt_cel);
         txtPassword = (EditText) findViewById(R.id.txt_pass);
-        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnLogin = (Button) findViewById(R.id.btn_confirm);
         btnRegistra = (Button) findViewById(R.id.btn_registrarse);
 
 
@@ -63,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
                                     //Obtiene usuario
                                     mDialog.dismiss();
                                     Usuario user = snapshot.child(txtCel.getText().toString()).getValue(Usuario.class);
+                                    user.setCelular(txtCel.getText().toString()); //SET celular
 
                                     String usert = "false";
 
-                                    if (user.getPassword().equals(txtPassword.getText().toString())) {
+                                    if (user.getPassword().equals(txtPassword.getText().toString()))
+                                    {
                                         Toast.makeText(MainActivity.this, "Bienvenido!", Toast.LENGTH_SHORT).show();
-
                                         Intent homeIntent = new Intent(MainActivity.this, Inicio.class);
                                         Common.currentUser=user;
                                         startActivity(homeIntent);
