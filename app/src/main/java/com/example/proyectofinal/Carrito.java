@@ -71,7 +71,7 @@ public class Carrito extends AppCompatActivity {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Carrito.this);
         alertDialog.setTitle("PideAltoq");
-        alertDialog.setMessage("Ingrese Su Número de Mesa:");
+        alertDialog.setMessage("Ingrese Número de Mesa:");
 
         final EditText edtMesa = new EditText(Carrito.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
