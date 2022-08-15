@@ -28,6 +28,8 @@
             android:ems="20"
             android:hint="@string/txt_cel"
             android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:padding="10dp" />
 
 
@@ -38,8 +40,10 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/shape"
             android:ems="20"
+            android:textColor="@color/black"
             android:hint="@string/txt_pass"
             android:inputType="textPassword"
+            android:textSize="20sp"
             android:padding="10dp" />
 
 

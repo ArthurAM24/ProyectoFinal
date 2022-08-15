@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.example.proyectofinal.Modelo.Pedido;
+import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.R;
 
 import java.text.NumberFormat;
@@ -49,11 +49,11 @@ class CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
 
-    private List<Pedido> ListDato = new ArrayList<>();
+    private List<Orden> ListDato = new ArrayList<>();
     private Context context;
 
 
-    public CarritoAdapter(List<Pedido> listDato, Context context) {
+    public CarritoAdapter(List<Orden> listDato, Context context) {
         ListDato = listDato;
         this.context = context;
     }
@@ -70,7 +70,8 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
 
         TextDrawable drawable=TextDrawable.builder().buildRound(""+ ListDato.get(position).getCantidad(), Color.RED);
         holder.imageCarritoCount.setImageDrawable(drawable);
-        Locale locale = new Locale("en","US");
+
+        Locale locale = new Locale("es","PE");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         int prec=(Integer.parseInt(ListDato.get(position).getPrecio()))*(Integer.parseInt(ListDato.get(position).getCantidad()));
 

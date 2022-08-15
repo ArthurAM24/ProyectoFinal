@@ -1,15 +1,21 @@
 package com.example.proyectofinal;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Database.Database;
+import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.Modelo.Pedido;
 import com.example.proyectofinal.View_Holder.CarritoAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -26,12 +32,12 @@ public class Carrito extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
-    DatabaseReference request;
+    DatabaseReference requests;
 
     TextView txtTotalPrecio;
     Button btnPlaceOrden;
 
-    List<Pedido> carrito = new ArrayList<>();
+    List<Orden> carrito = new ArrayList<>();
     CarritoAdapter adapter;
 
     @Override
@@ -39,9 +45,9 @@ public class Carrito extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
 
-      /*  database = FirebaseDatabase.getInstance();
-        request = database.getReference("Pedidos");
-*/
+        database = FirebaseDatabase.getInstance();
+        requests = database.getReference("Pedidos");
+
         recyclerView = findViewById(R.id.listaCarrito);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -51,17 +57,63 @@ public class Carrito extends AppCompatActivity {
         btnPlaceOrden = findViewById(R.id.btn_confirm);
 
         btnPlaceOrden.setOnClickListener(v -> {
-            if(!carrito.isEmpty())
-                MostgrarAlerta();
+            if (!carrito.isEmpty())
+
+                MostrarAlerta();
             else
-                Toast.makeText(Carrito.this,"Carrito Vacio!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Carrito.this, "Carrito Vacio!", Toast.LENGTH_SHORT).show();
         });
 
-       CargarListaComidas();
+        CargarListaComidas();
     }
-    private void MostgrarAlerta() {
+
+    private void MostrarAlerta() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Carrito.this);
+        alertDialog.setTitle("PideAltoq");
+        alertDialog.setMessage("Ingrese Su Número de Mesa:");
+
+        final EditText edtMesa = new EditText(Carrito.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        edtMesa.setLayoutParams(lp);
+        alertDialog.setView(edtMesa);
+        //alertDialog.setView(R.drawable.ic_shopping_cart_black_24dp);
+
+        alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Pedido request = new Pedido(
+                        Common.currentUser.getCelular(),
+                        Common.currentUser.getNombres(),
+                        edtMesa.getText().toString(),
+                        txtTotalPrecio.getText().toString(),
+                        carrito
+                );
+
+                //Add to Firebase+
+                requests.child(String.valueOf(System.currentTimeMillis()))
+                        .setValue(request);
+
+                //Eliminar Carrito
+                new Database(getBaseContext()).limpíaCarrito();
+                Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertDialog.show();
 
     }
+
     private void CargarListaComidas() {
         carrito = new Database(this).getCarrito();
         adapter = new CarritoAdapter(carrito, this);
@@ -69,13 +121,14 @@ public class Carrito extends AppCompatActivity {
         //CALCULA EL PRECIO
 
         int total = 0;
-        for (Pedido pedido:carrito)
-            total += (Integer.parseInt(pedido.getPrecio()))*(Integer.parseInt(pedido.getCantidad()));
+        for (Orden pedido : carrito)
+            total += (Integer.parseInt(pedido.getPrecio())) * (Integer.parseInt(pedido.getCantidad()));
 
-        Locale locale = new Locale("en","US");
+        Locale locale = new Locale("es", "PE");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
         txtTotalPrecio.setText(fmt.format(total));
+
     }
 
 

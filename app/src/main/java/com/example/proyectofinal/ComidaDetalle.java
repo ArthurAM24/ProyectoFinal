@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Database.Database;
 import com.example.proyectofinal.Modelo.Comida;
-import com.example.proyectofinal.Modelo.Pedido;
+import com.example.proyectofinal.Modelo.Orden;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ public class ComidaDetalle extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton btnCarrito;
     TextView Cantidad;
-    int contador = 0;
+    int contador = 1;
 
     String comidaID = "";
 
@@ -55,10 +55,11 @@ public class ComidaDetalle extends AppCompatActivity {
 
         btnCarrito = (FloatingActionButton) findViewById(R.id.btnCart);
         btnCarrito.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                new Database(getBaseContext()).agregarAlCarrito(new Pedido(
+                new Database(getBaseContext()).agregarAlCarrito(new Orden(
                         comidaID,
                         comidaActual.getNombre(),
                         Cantidad.getText().toString(),

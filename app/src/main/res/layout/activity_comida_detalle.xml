@@ -59,6 +59,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -72,12 +73,14 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/comida_name"
@@ -94,7 +97,8 @@
                         android:id="@+id/layout_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:background="@color/white">
 
                         <ImageView
                             android:id="@+id/img_simbol_pen"
@@ -103,8 +107,8 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginRight="1dp"
                             android:layout_weight="2"
-                            android:src="@drawable/ic_svgsol"
-                            android:contentDescription="TODO"></ImageView>
+                            android:contentDescription="TODO"
+                            android:src="@drawable/ic_svgsol"></ImageView>
 
                         <TextView
                             android:id="@+id/comida_precio"
@@ -162,10 +166,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+               app:cardBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+
+                >
 
                 <TextView
                     android:id="@+id/comida_descripcion"
@@ -177,6 +184,7 @@
                     android:padding="12dp"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
                     tools:text="@string/comida_descripcion">
 
                 </TextView>

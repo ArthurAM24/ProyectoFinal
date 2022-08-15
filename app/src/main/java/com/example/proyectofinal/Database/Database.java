@@ -4,28 +4,37 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import com.example.proyectofinal.Modelo.Pedido;
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.example.proyectofinal.Modelo.Orden;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database extends SQLiteAssetHelper {
+public class Database extends SQLiteOpenHelper {
+
     private static final String DB_NAME = "Proyecto.db";
     private static final int DB_VER = 1;
-    /*private static final String TABLA_DB="CREATE TABLE OrdenDetalle(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "ProductoID TEXT, ProductoNomb TEXT, Cantidad TEXT, Precio TEXT, Descuento TEXT)";*/
+    private static final String TABLA_DB="CREATE TABLE OrdenDetalle(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "ProductoID TEXT, ProductoNomb TEXT, Cantidad TEXT, Precio TEXT, Descuento TEXT)";
 
-    public Database(Context context) {
+    public Database( Context context) {
         super(context, DB_NAME, null, DB_VER);
     }
 
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLA_DB);
+    }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
 
     @SuppressLint("Range")
-    public List<Pedido> getCarrito() {
+    public List<Orden> getCarrito() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
@@ -35,11 +44,11 @@ public class Database extends SQLiteAssetHelper {
         qb.setTables(sqlTable);
         Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
 
-        final List<Pedido> result= new ArrayList<>();
+        final List<Orden> result= new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
-                result.add(new Pedido(c.getString(c.getColumnIndex("ProductoID")),
+                result.add(new Orden(c.getString(c.getColumnIndex("ProductoID")),
                         c.getString(c.getColumnIndex("ProductoNomb")),
                         c.getString(c.getColumnIndex("Cantidad")),
                         c.getString(c.getColumnIndex("Precio")),
@@ -49,7 +58,7 @@ public class Database extends SQLiteAssetHelper {
         }
         return result;
     }
-    public void agregarAlCarrito(Pedido pedido){
+    public void agregarAlCarrito(Orden pedido){
 
         SQLiteDatabase db=getReadableDatabase();
         if (db!=null) {
@@ -70,4 +79,5 @@ public class Database extends SQLiteAssetHelper {
         String query = String.format("DELETE FROM OrdenDetalle");
         db.execSQL(query);
     }
+
 }
