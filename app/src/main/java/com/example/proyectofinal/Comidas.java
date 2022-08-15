@@ -58,7 +58,7 @@ public class Comidas extends AppCompatActivity {
         }
 
     }
-
+    //metodo cargar lista comidas
     private void cargarListaComidas(String categoriaID) {
         adapter= new FirebaseRecyclerAdapter<Comida, ComidaViewHolder>(Comida.class,R.layout.comidas_item,ComidaViewHolder.class,
                 comidaList.orderByChild("MenuID").equalTo(categoriaID)) {
