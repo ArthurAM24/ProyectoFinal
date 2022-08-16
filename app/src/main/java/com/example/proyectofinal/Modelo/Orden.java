@@ -1,60 +1,73 @@
 package com.example.proyectofinal.Modelo;
 
+import java.util.List;
+
 public class Orden {
-    private String ProductoID;
-    private String ProductoNomb;
-    private String Cantidad;
-    private String Precio;
-    private String Descuento;
+    private String celular;
+    private String nombre;
+    private String NroMesa;
+    private String total;
+    private String estado;
+    private List<Pedido> comidas;
 
     public Orden() {
     }
 
-    public Orden(String productoID, String productoNomb, String cantidad, String precio, String descuento) {
-        ProductoID = productoID;
-        ProductoNomb = productoNomb;
-        Cantidad = cantidad;
-        Precio = precio;
-        Descuento = descuento;
+    public Orden(String celular, String nombre, String nroMesa, String total, List<Pedido> comidas) {
+        this.celular = celular;
+        this.nombre = nombre;
+        NroMesa = nroMesa;
+        this.total = total;
+        this.comidas = comidas;
+        this.estado="0";// default 0, atendido 1, listo 2
     }
 
-    public String getProductoID() {
-        return ProductoID;
+
+    public String getEstado() {
+        return estado;
     }
 
-    public void setProductoID(String productoID) {
-        ProductoID = productoID;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getProductoNomb() {
-        return ProductoNomb;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setProductoNomb(String productoNomb) {
-        ProductoNomb = productoNomb;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
-    public String getCantidad() {
-        return Cantidad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCantidad(String cantidad) {
-        Cantidad = cantidad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getPrecio() {
-        return Precio;
+    public String getNroMesa() {
+        return NroMesa;
     }
 
-    public void setPrecio(String precio) {
-        Precio = precio;
+    public void setNroMesa(String nroMesa) {
+        NroMesa = nroMesa;
     }
 
-    public String getDescuento() {
-        return Descuento;
+    public String getTotal() {
+        return total;
     }
 
-    public void setDescuento(String descuento) {
-        Descuento = descuento;
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public List<Pedido> getComidas() {
+        return comidas;
+    }
+
+    public void setComidas(List<Pedido> comidas) {
+        this.comidas = comidas;
     }
 }

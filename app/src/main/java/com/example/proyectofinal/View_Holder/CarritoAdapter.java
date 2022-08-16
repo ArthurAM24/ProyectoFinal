@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.example.proyectofinal.Common.Common;
-import com.example.proyectofinal.Modelo.Orden;
+import com.example.proyectofinal.Modelo.Pedido;
 import com.example.proyectofinal.R;
 
 import java.text.NumberFormat;
@@ -59,11 +59,11 @@ class  CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
 
-    private List<Orden> ListDato;
+    private List<Pedido> ListDato;
     private Context context;
 
 
-    public CarritoAdapter(List<Orden> listDato, Context context) {
+    public CarritoAdapter(List<Pedido> listDato, Context context) {
         ListDato = listDato;
         this.context = context;
     }

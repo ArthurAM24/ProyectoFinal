@@ -1,62 +1,60 @@
 package com.example.proyectofinal.Modelo;
 
-import java.util.List;
-
 public class Pedido {
-    private String celular;
-    private String nombre;
-    private String NroMesa;
-    private String total;
-    private List<Orden> comidas;
+    private String ProductoID;
+    private String ProductoNomb;
+    private String Cantidad;
+    private String Precio;
+    private String Descuento;
 
     public Pedido() {
     }
 
-    public Pedido(String celular, String nombre, String nroMesa, String total, List<Orden> comidas) {
-        this.celular = celular;
-        this.nombre = nombre;
-        NroMesa = nroMesa;
-        this.total = total;
-        this.comidas = comidas;
+    public Pedido(String productoID, String productoNomb, String cantidad, String precio, String descuento) {
+        ProductoID = productoID;
+        ProductoNomb = productoNomb;
+        Cantidad = cantidad;
+        Precio = precio;
+        Descuento = descuento;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getProductoID() {
+        return ProductoID;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setProductoID(String productoID) {
+        ProductoID = productoID;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getProductoNomb() {
+        return ProductoNomb;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setProductoNomb(String productoNomb) {
+        ProductoNomb = productoNomb;
     }
 
-    public String getNroMesa() {
-        return NroMesa;
+    public String getCantidad() {
+        return Cantidad;
     }
 
-    public void setNroMesa(String nroMesa) {
-        NroMesa = nroMesa;
+    public void setCantidad(String cantidad) {
+        Cantidad = cantidad;
     }
 
-    public String getTotal() {
-        return total;
+    public String getPrecio() {
+        return Precio;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setPrecio(String precio) {
+        Precio = precio;
     }
 
-    public List<Orden> getComidas() {
-        return comidas;
+    public String getDescuento() {
+        return Descuento;
     }
 
-    public void setComidas(List<Orden> comidas) {
-        this.comidas = comidas;
+    public void setDescuento(String descuento) {
+        Descuento = descuento;
     }
 }

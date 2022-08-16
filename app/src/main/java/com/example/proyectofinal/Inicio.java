@@ -158,7 +158,8 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             startActivity(cartIntent);
 
         } else if (id == R.id.nav_oders) {
-
+            Intent OrdIntent = new Intent(Inicio.this,EstadoDeOrden.class);
+            startActivity(OrdIntent);
 
         } else if (id == R.id.nav_log_out) {
 

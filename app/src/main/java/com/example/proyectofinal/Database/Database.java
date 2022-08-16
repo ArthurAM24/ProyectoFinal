@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import com.example.proyectofinal.Modelo.Orden;
+import com.example.proyectofinal.Modelo.Pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public List<Orden> getCarrito() {
+    public List<Pedido> getCarrito() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
@@ -44,11 +44,11 @@ public class Database extends SQLiteOpenHelper {
         qb.setTables(sqlTable);
         Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
 
-        final List<Orden> result= new ArrayList<>();
+        final List<Pedido> result= new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
-                result.add(new Orden(c.getString(c.getColumnIndex("ProductoID")),
+                result.add(new Pedido(c.getString(c.getColumnIndex("ProductoID")),
                         c.getString(c.getColumnIndex("ProductoNomb")),
                         c.getString(c.getColumnIndex("Cantidad")),
                         c.getString(c.getColumnIndex("Precio")),
@@ -58,7 +58,7 @@ public class Database extends SQLiteOpenHelper {
         }
         return result;
     }
-    public void agregarAlCarrito(Orden pedido){
+    public void agregarAlCarrito(Pedido pedido){
 
         SQLiteDatabase db=getReadableDatabase();
         if (db!=null) {

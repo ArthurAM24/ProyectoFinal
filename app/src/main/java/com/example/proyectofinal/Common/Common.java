@@ -11,9 +11,9 @@ public class Common {
 
     public static String convertCodeToStatus(String status) {
         if(status.equals("0"))
-            return  "Orden Realizada.";
+            return  "Pedido Realizado.";
         else if(status.equals("1"))
-            return "Orden Siendo preparada.";
+            return "Pedido Siendo preparado.";
         else
             return "Devilery Listo!";
     }

@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Database.Database;
-import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.Modelo.Pedido;
+import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.View_Holder.CarritoAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,7 +39,7 @@ public class Carrito extends AppCompatActivity {
     TextView txtTotalPrecio;
     Button btnPlaceOrden;
 
-    List<Orden> carrito = new ArrayList<>();
+    List<Pedido> carrito = new ArrayList<>();
     CarritoAdapter adapter;
 
     @Override
@@ -86,7 +86,7 @@ public class Carrito extends AppCompatActivity {
         //alertDialog.setView(R.drawable.ic_shopping_cart_black_24dp);
 
         alertDialog.setPositiveButton("SI", (dialog, which) -> {
-            Pedido request = new Pedido(
+            Orden request = new Orden(
                     Common.currentUser.getCelular(),
                     Common.currentUser.getNombres(),
                     edtMesa.getText().toString(),
@@ -118,7 +118,7 @@ public class Carrito extends AppCompatActivity {
         //CALCULA EL PRECIO
 
         int total = 0;
-        for (Orden pedido : carrito)
+        for (Pedido pedido : carrito)
             total += (Integer.parseInt(pedido.getPrecio())) * (Integer.parseInt(pedido.getCantidad()));
 
         Locale locale = new Locale("es", "PE");
@@ -139,7 +139,7 @@ public class Carrito extends AppCompatActivity {
         //delete by position from List<Order>
         carrito.remove(position);
         new Database(this).limpíaCarrito();
-        for (Orden item : carrito) {
+        for (Pedido item : carrito) {
             new Database(this).agregarAlCarrito(item);
         }
         CargarListaComidas();
