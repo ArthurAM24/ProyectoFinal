@@ -17,34 +17,40 @@
             android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo"
+            android:contentDescription="@string/ini_title" />
 
         <EditText
             android:id="@+id/txt_cel"
             android:layout_width="330dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape"
             android:ems="20"
             android:hint="@string/txt_cel"
             android:inputType="number"
+            android:padding="10dp"
             android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="20sp"
-            android:padding="10dp" />
+            android:autofillHints="" />
 
 
         <EditText
             android:id="@+id/txt_pass"
             android:layout_width="330dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape"
             android:ems="20"
+            android:textColorHint="@color/grey"
             android:textColor="@color/black"
             android:hint="@string/txt_pass"
             android:inputType="textPassword"
+            android:padding="10dp"
+
             android:textSize="20sp"
-            android:padding="10dp" />
+            android:autofillHints="" />
 
 
         <Button

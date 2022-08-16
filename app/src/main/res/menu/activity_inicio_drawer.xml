@@ -18,7 +18,7 @@
             android:id="@+id/nav_oders"
             android:icon="@drawable/ic_baseline_access_time_24"
             android:iconTint="@android:color/white"
-            android:title="Ordenes" />
+            android:title="Órdenes" />
         <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_baseline_exit_to_app_24"

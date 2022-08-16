@@ -67,11 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
                                     String usert = "false";
 
-                                    if (user.getPassword().equals(txtPassword.getText().toString()))
-                                    {
+                                    if (user.getPassword().equals(txtPassword.getText().toString())) {
                                         Toast.makeText(MainActivity.this, "Bienvenido!", Toast.LENGTH_SHORT).show();
                                         Intent homeIntent = new Intent(MainActivity.this, Inicio.class);
-                                        Common.currentUser=user;
+                                        Common.currentUser = user;
                                         startActivity(homeIntent);
                                         finish();
                                     } else {
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(MainActivity.this, "Revise su conexion!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Revise su conexion a Internet!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegistra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registra= new Intent(MainActivity.this,Registrar.class);
+                Intent registra = new Intent(MainActivity.this, Registrar.class);
                 startActivity(registra);
             }
         });

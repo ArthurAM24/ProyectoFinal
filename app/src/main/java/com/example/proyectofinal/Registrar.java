@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,36 +46,42 @@ public class Registrar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (Common.isConnectedToInternet(getBaseContext())) {
 
-                final ProgressDialog mDialog = new ProgressDialog(Registrar.this);
-                mDialog.setMessage("Porfavor espere...");
-                mDialog.show();
+                    final ProgressDialog mDialog = new ProgressDialog(Registrar.this);
+                    mDialog.setMessage("Porfavor espere...");
+                    mDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        mDialog.dismiss();
-                        if (snapshot.child(txtCelular.getText().toString()).exists()) {
+                    table_user.addValueEventListener(new ValueEventListener() {
 
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                             mDialog.dismiss();
-                            Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
+                            if (snapshot.child(txtCelular.getText().toString()).exists()) {
 
-                        } else {
+                                mDialog.dismiss();
+                                Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
 
-                            mDialog.dismiss();
-                            Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
-                            table_user.child(txtCelular.getText().toString()).setValue(user);
-                            Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
-                            finish();
+                            } else {
+
+                                mDialog.dismiss();
+                                Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
+                                table_user.child(txtCelular.getText().toString()).setValue(user);
+                                Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
                         }
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                        }
+                    });
+                } else {
+                    Toast.makeText(Registrar.this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
 

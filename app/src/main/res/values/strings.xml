@@ -1,5 +1,6 @@
 <resources>
     //INICIO
+    <string name="ini_title">Pide Altoq</string>
     <string name="app_name">PideAltoq</string>
     <string name="txt_cel">N° de Celular</string>
     <string name="txt_pass">Contraseña</string>

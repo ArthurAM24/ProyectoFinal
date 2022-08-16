@@ -2,12 +2,14 @@ package com.example.proyectofinal;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,6 +69,7 @@ public class Carrito extends AppCompatActivity {
         CargarListaComidas();
     }
 
+    //metodo Mostrar Alerta
     private void MostrarAlerta() {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Carrito.this);
@@ -117,6 +120,7 @@ public class Carrito extends AppCompatActivity {
     private void CargarListaComidas() {
         carrito = new Database(this).getCarrito();
         adapter = new CarritoAdapter(carrito, this);
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         //CALCULA EL PRECIO
 
@@ -131,5 +135,21 @@ public class Carrito extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().equals(Common.DELETE))
+            deleteCart(item.getOrder());
+        return true;
+    }
+
+    private void deleteCart(int position) {
+        //delete by position from List<Order>
+        carrito.remove(position);
+        new Database(this).limpíaCarrito();
+        for (Orden item : carrito) {
+            new Database(this).agregarAlCarrito(item);
+        }
+        CargarListaComidas();
+    }
 
 }

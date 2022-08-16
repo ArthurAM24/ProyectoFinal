@@ -3,6 +3,7 @@ package com.example.proyectofinal.View_Holder;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.R;
 
@@ -23,7 +25,8 @@ import java.util.Locale;
 
 import Interface.ItemClickListener;
 
-class CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class  CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+        ,View.OnCreateContextMenuListener {
 
     public TextView txtCarrito_nomb, txtPrecio;
     public ImageView imageCarritoCount;
@@ -39,11 +42,19 @@ class CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         txtCarrito_nomb = (TextView) itemView.findViewById(R.id.cart_item_name);
         txtPrecio = (TextView) itemView.findViewById(R.id.cart_item_Price);
         imageCarritoCount = (ImageView) itemView.findViewById(R.id.cart_item_count);
+
+        itemView.setOnCreateContextMenuListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Seleccione Acción");
+        menu.add(0,0,getAdapterPosition(), Common.DELETE);
     }
 }
 
@@ -59,14 +70,14 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
     }
 
     @Override
-    public CarritoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CarritoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater= LayoutInflater.from(context);
         View itemView= inflater.inflate(R.layout.carrito_layout,parent,false);
         return new CarritoViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
+    public void onBindViewHolder(CarritoViewHolder holder, int position) {
 
         TextDrawable drawable=TextDrawable.builder().buildRound(""+ ListDato.get(position).getCantidad(), Color.RED);
         holder.imageCarritoCount.setImageDrawable(drawable);

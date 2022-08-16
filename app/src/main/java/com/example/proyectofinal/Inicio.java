@@ -90,7 +90,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         if (Common.isConnectedToInternet(this)) {
             loadMenu();
-            Toast.makeText(this, "Conectado a Internet!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Conectado a Internet!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
 
@@ -161,6 +161,8 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         } else if (id == R.id.nav_cart) {
 
+            Intent cartIntent = new Intent(Inicio.this,Carrito.class);
+            startActivity(cartIntent);
 
         } else if (id == R.id.nav_oders) {
 
