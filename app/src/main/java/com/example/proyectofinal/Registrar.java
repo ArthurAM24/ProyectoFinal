@@ -3,7 +3,6 @@ package com.example.proyectofinal;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,66 +30,60 @@ public class Registrar extends AppCompatActivity {
         setContentView(R.layout.activity_registrar);
 
 
-        txtNombre = (EditText) findViewById(R.id.txt_nombre);
-        txtCorreo = (EditText) findViewById(R.id.txt_correo);
-        txtCelular = (EditText) findViewById(R.id.txt_celular);
-        txtContra = (EditText) findViewById(R.id.txt_contraseña);
+        txtNombre =  findViewById(R.id.txt_nombre);
+        txtCorreo = findViewById(R.id.txt_correo);
+        txtCelular =  findViewById(R.id.txt_celular);
+        txtContra =  findViewById(R.id.txt_contraseña);
 
-        btnRegistra = (Button) findViewById(R.id.btn_registrarse);
-        btnCancel = (Button) findViewById(R.id.btn_cancelar);
+        btnRegistra = findViewById(R.id.btn_registrarse);
+        btnCancel =  findViewById(R.id.btn_cancelar);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("usuarios");
 
-        btnRegistra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnRegistra.setOnClickListener(v -> {
 
-                if (Common.isConnectedToInternet(getBaseContext())) {
+            if (Common.isConnectedToInternet(getBaseContext())) {
 
-                    final ProgressDialog mDialog = new ProgressDialog(Registrar.this);
-                    mDialog.setMessage("Porfavor espere...");
-                    mDialog.show();
+                final ProgressDialog mDialog = new ProgressDialog(Registrar.this);
+                mDialog.setMessage("Porfavor espere...");
+                mDialog.show();
 
-                    table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addValueEventListener(new ValueEventListener() {
 
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        mDialog.dismiss();
+                        if (snapshot.child(txtCelular.getText().toString()).exists()) {
+
                             mDialog.dismiss();
-                            if (snapshot.child(txtCelular.getText().toString()).exists()) {
+                            Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
 
-                                mDialog.dismiss();
-                                Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
+                        } else {
 
-                            } else {
-
-                                mDialog.dismiss();
-                                Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
-                                table_user.child(txtCelular.getText().toString()).setValue(user);
-                                Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-
+                            mDialog.dismiss();
+                            Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
+                            table_user.child(txtCelular.getText().toString()).setValue(user);
+                            Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    }
 
-                        }
-                    });
-                } else {
-                    Toast.makeText(Registrar.this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            } else {
+                Toast.makeText(Registrar.this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cancl = new Intent(Registrar.this, MainActivity.class);
-                startActivity(cancl);
-            }
+        btnCancel.setOnClickListener(v -> {
+            Intent cancl = new Intent(Registrar.this, MainActivity.class);
+            startActivity(cancl);
         });
 
     }

@@ -1,6 +1,6 @@
 package com.example.proyectofinal;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -85,38 +85,31 @@ public class Carrito extends AppCompatActivity {
         alertDialog.setView(edtMesa);
         //alertDialog.setView(R.drawable.ic_shopping_cart_black_24dp);
 
-        alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Pedido request = new Pedido(
-                        Common.currentUser.getCelular(),
-                        Common.currentUser.getNombres(),
-                        edtMesa.getText().toString(),
-                        txtTotalPrecio.getText().toString(),
-                        carrito
-                );
+        alertDialog.setPositiveButton("SI", (dialog, which) -> {
+            Pedido request = new Pedido(
+                    Common.currentUser.getCelular(),
+                    Common.currentUser.getNombres(),
+                    edtMesa.getText().toString(),
+                    txtTotalPrecio.getText().toString(),
+                    carrito
+            );
 
-                //Add to Firebase+
-                requests.child(String.valueOf(System.currentTimeMillis()))
-                        .setValue(request);
+            //Add to Firebase+
+            requests.child(String.valueOf(System.currentTimeMillis()))
+                    .setValue(request);
 
-                //Eliminar Carrito
-                new Database(getBaseContext()).limpíaCarrito();
-                Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+            //Eliminar Carrito
+            new Database(getBaseContext()).limpíaCarrito();
+            Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
+            finish();
         });
 
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
-            }
-        });
+        alertDialog.setNegativeButton("NO", (dialogInterface, which) -> dialogInterface.dismiss());
         alertDialog.show();
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void CargarListaComidas() {
         carrito = new Database(this).getCarrito();
         adapter = new CarritoAdapter(carrito, this);

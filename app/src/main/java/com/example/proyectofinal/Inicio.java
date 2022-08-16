@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,8 +27,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import Interface.ItemClickListener;
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -57,14 +56,11 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         database = FirebaseDatabase.getInstance();
         category = database.getReference("categoria");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent carritoInten = new Intent(Inicio.this, Carrito.class);
-                startActivity(carritoInten);
-            }
+        fab.setOnClickListener(v -> {
+            Intent carritoInten = new Intent(Inicio.this, Carrito.class);
+            startActivity(carritoInten);
         });
 
 
@@ -78,11 +74,11 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         //Nombre de usuario
         View headerView = navigationView.getHeaderView(0);
-        txtFullName = (TextView) headerView.findViewById(R.id.txt_Fullnombre);
+        txtFullName =  headerView.findViewById(R.id.txt_Fullnombre);
         txtFullName.setText(Common.currentUser.getCorreo());
 
         //Cargar menu
-        recycler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
+        recycler_menu =  findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
@@ -111,15 +107,12 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
                         Categoria clickItem = model;
 
-                        menuViewHolder.setItemClickListener(new ItemClickListener() {
-                            @Override
-                            public void onClick(View view, int position, boolean isLongClick) {
-                                //Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
-                                //Obtiene categoria y lo ennvia a la otra actividad
-                                Intent comidaLista = new Intent(Inicio.this, Comidas.class);
-                                comidaLista.putExtra("CategoriaID", adapter.getRef(position).getKey());
-                                startActivity(comidaLista);
-                            }
+                        menuViewHolder.setItemClickListener((view, position, isLongClick) -> {
+                            //Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
+                            //Obtiene categoria y lo ennvia a la otra actividad
+                            Intent comidaLista = new Intent(Inicio.this, Comidas.class);
+                            comidaLista.putExtra("CategoriaID", adapter.getRef(position).getKey());
+                            startActivity(comidaLista);
                         });
                     }
                 };
@@ -138,7 +131,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;

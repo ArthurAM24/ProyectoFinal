@@ -19,7 +19,6 @@ import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.R;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,9 +38,9 @@ class  CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     public CarritoViewHolder(@NonNull View itemView) {
         super(itemView);
-        txtCarrito_nomb = (TextView) itemView.findViewById(R.id.cart_item_name);
-        txtPrecio = (TextView) itemView.findViewById(R.id.cart_item_Price);
-        imageCarritoCount = (ImageView) itemView.findViewById(R.id.cart_item_count);
+        txtCarrito_nomb =  itemView.findViewById(R.id.cart_item_name);
+        txtPrecio =  itemView.findViewById(R.id.cart_item_Price);
+        imageCarritoCount =  itemView.findViewById(R.id.cart_item_count);
 
         itemView.setOnCreateContextMenuListener(this);
     }
@@ -60,7 +59,7 @@ class  CarritoViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
 
-    private List<Orden> ListDato = new ArrayList<>();
+    private List<Orden> ListDato;
     private Context context;
 
 
@@ -69,8 +68,9 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoViewHolder> {
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public CarritoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CarritoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= LayoutInflater.from(context);
         View itemView= inflater.inflate(R.layout.carrito_layout,parent,false);
         return new CarritoViewHolder(itemView);

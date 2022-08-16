@@ -23,31 +23,32 @@
 
             <TextView
                 android:id="@+id/cart_item_name"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical|start"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="Comida 01"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="10dp"
+                android:text="@string/comidanames"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cart_item_Price"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical|start"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="S/. 00.00"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="10dp"
+                android:text="@string/_0_00"
+                android:textAllCaps="true"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <ImageView
             android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:id="@+id/cart_item_count"
             android:layout_width="25dp"
-            android:layout_height="25dp"/>
+            android:layout_height="25dp"
+            android:contentDescription="@string/init_carritos" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

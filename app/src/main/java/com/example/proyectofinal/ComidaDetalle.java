@@ -1,5 +1,6 @@
 package com.example.proyectofinal;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +46,7 @@ public class ComidaDetalle extends AppCompatActivity {
         setContentView(R.layout.activity_comida_detalle);
 
         //BUTTONS
-        Cantidad = (TextView) findViewById(R.id.textViewNumber);
+        Cantidad = findViewById(R.id.textViewNumber);
 
         //FIREBASE
         database = FirebaseDatabase.getInstance();
@@ -53,32 +54,28 @@ public class ComidaDetalle extends AppCompatActivity {
 
         //INICIO VIEW
 
-        btnCarrito = (FloatingActionButton) findViewById(R.id.btnCart);
-        btnCarrito.setOnClickListener(new View.OnClickListener() {
+        btnCarrito = findViewById(R.id.btnCart);
+        btnCarrito.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            new Database(getBaseContext()).agregarAlCarrito(new Orden(
+                    comidaID,
+                    comidaActual.getNombre(),
+                    Cantidad.getText().toString(),
+                    comidaActual.getPrecio(),
+                    comidaActual.getDescuento()
 
-                new Database(getBaseContext()).agregarAlCarrito(new Orden(
-                        comidaID,
-                        comidaActual.getNombre(),
-                        Cantidad.getText().toString(),
-                        comidaActual.getPrecio(),
-                        comidaActual.getDescuento()
-
-                ));
-                Toast.makeText(ComidaDetalle.this, "Agregado Al carrito", Toast.LENGTH_SHORT).show();
-            }
+            ));
+            Toast.makeText(ComidaDetalle.this, "Agregado Al carrito", Toast.LENGTH_SHORT).show();
         });
 
 
-        comida_descripcion = (TextView) findViewById(R.id.comida_descripcion);
-        comida_nombre = (TextView) findViewById(R.id.comida_name);
-        comida_precio = (TextView) findViewById(R.id.comida_precio);
-        comida_imagen = (ImageView) findViewById(R.id.img_comida);
+        comida_descripcion = findViewById(R.id.comida_descripcion);
+        comida_nombre =  findViewById(R.id.comida_name);
+        comida_precio =  findViewById(R.id.comida_precio);
+        comida_imagen = findViewById(R.id.img_comida);
 
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
+        collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollaspedAppbar);
 
@@ -90,17 +87,19 @@ public class ComidaDetalle extends AppCompatActivity {
                 getDetalleComida(comidaID);
             else {
                 Toast.makeText(ComidaDetalle.this, "Porfavor revise su conexion!", Toast.LENGTH_SHORT).show();
-                return;
+
             }
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void incrementar(View view) {
         contador++;
         Cantidad.setText("" + contador);
     }
 
+    @SuppressLint("SetTextI18n")
     public void decrementar(View view) {
         if (contador <= 1) {
             contador = 1;
