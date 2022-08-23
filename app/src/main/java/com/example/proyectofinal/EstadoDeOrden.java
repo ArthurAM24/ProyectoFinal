@@ -1,6 +1,7 @@
 package com.example.proyectofinal;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import com.example.proyectofinal.View_Holder.OrdenViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import Interface.ItemClickListener;
 
 public class EstadoDeOrden extends AppCompatActivity {
 
@@ -37,6 +40,10 @@ public class EstadoDeOrden extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        if (getIntent().getExtras() == null)
+            loadOrders(Common.currentUser.getCelular());
+        else
+            loadOrders(getIntent().getStringExtra("userCel"));
         loadOrders(Common.currentUser.getCelular());
 
     }
@@ -54,11 +61,19 @@ public class EstadoDeOrden extends AppCompatActivity {
                 ordenViewHolder.txtOrdenID.setText(adapter.getRef(i).getKey());
                 ordenViewHolder.txtOrdenEstado.setText(Common.convertCodeToStatus(orden.getEstado()));
                 ordenViewHolder.txtNombre.setText(orden.getNombre());
-                ordenViewHolder.txtMesa.setText(orden.getNroMesa());
+                ordenViewHolder.txtMesa.setText("Número de Mesa: "+orden.getNroMesa());
+
+                ordenViewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+
+                    }
+                });
             }
 
 
         };
+
         recyclerView.setAdapter(adapter);
     }
 

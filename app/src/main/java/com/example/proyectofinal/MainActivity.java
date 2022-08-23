@@ -21,11 +21,13 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
 
+    private static final String TAG ="Arti" ;
     private EditText txtCel;
     private EditText txtPassword;
 
     private Button btnLogin;
     private Button btnRegistra;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         txtCel = findViewById(R.id.txt_cel);
         txtPassword = findViewById(R.id.txt_pass);
-        btnLogin = findViewById(R.id.btn_confirm);
-        btnRegistra =  findViewById(R.id.btn_registrarse);
 
+        btnLogin = findViewById(R.id.btn_confirm);
+
+        btnRegistra =  findViewById(R.id.btn_registrarse);
 
         //iniciar firebase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();

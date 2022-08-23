@@ -75,7 +75,9 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         //Nombre de usuario
         View headerView = navigationView.getHeaderView(0);
         txtFullName =  headerView.findViewById(R.id.txt_Fullnombre);
-        txtFullName.setText(Common.currentUser.getCorreo());
+        txtFullName.setText(Common.currentUser.getNombres());
+
+
 
         //Cargar menu
         recycler_menu =  findViewById(R.id.recycler_menu);
