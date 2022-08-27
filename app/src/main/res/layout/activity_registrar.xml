@@ -55,6 +55,7 @@
 
         <EditText
             android:id="@+id/txt_celular"
+            android:maxLength="9"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:textColor="@color/black"
