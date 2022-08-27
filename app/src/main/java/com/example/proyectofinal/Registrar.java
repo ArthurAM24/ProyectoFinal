@@ -30,13 +30,13 @@ public class Registrar extends AppCompatActivity {
         setContentView(R.layout.activity_registrar);
 
 
-        txtNombre =  findViewById(R.id.txt_nombre);
+        txtNombre = findViewById(R.id.txt_nombre);
         txtCorreo = findViewById(R.id.txt_correo);
-        txtCelular =  findViewById(R.id.txt_celular);
-        txtContra =  findViewById(R.id.txt_contraseña);
+        txtCelular = findViewById(R.id.txt_celular);
+        txtContra = findViewById(R.id.txt_contraseña);
 
         btnRegistra = findViewById(R.id.btn_registrarse);
-        btnCancel =  findViewById(R.id.btn_cancelar);
+        btnCancel = findViewById(R.id.btn_cancelar);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("usuarios");
@@ -49,26 +49,42 @@ public class Registrar extends AppCompatActivity {
                 mDialog.setMessage("Porfavor espere...");
                 mDialog.show();
 
+                if (txtCelular.getText().toString().isEmpty()
+                        || txtNombre.getText().toString().isEmpty()
+                        || txtCorreo.getText().toString().isEmpty()
+                        || txtContra.getText().toString().isEmpty()) {
+
+                    Toast.makeText(Registrar.this, "Ingrese datos", Toast.LENGTH_SHORT).show();
+                }
+
                 table_user.addValueEventListener(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         mDialog.dismiss();
-                        if (snapshot.child(txtCelular.getText().toString()).exists()) {
+                        if (!txtCelular.getText().toString().isEmpty()
+                                && !txtNombre.getText().toString().isEmpty()
+                                && !txtCorreo.getText().toString().isEmpty()
+                                && !txtContra.getText().toString().isEmpty()) {
 
-                            mDialog.dismiss();
-                            Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
+                            if (snapshot.child(txtCelular.getText().toString()).exists()) {
 
-                        } else {
+                                mDialog.dismiss();
+                                Toast.makeText(Registrar.this, "El Número de celular ya se encuentra registrado!", Toast.LENGTH_SHORT).show();
 
-                            mDialog.dismiss();
-                            Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
-                            table_user.child(txtCelular.getText().toString()).setValue(user);
-                            Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
-                            finish();
+                            } else {
+
+                                mDialog.dismiss();
+                                Usuario user = new Usuario(txtCorreo.getText().toString(), txtNombre.getText().toString(), txtContra.getText().toString());
+                                table_user.child(txtCelular.getText().toString()).setValue(user);
+                                Toast.makeText(Registrar.this, "Usuario Registrado con éxito!", Toast.LENGTH_SHORT).show();
+                                limpiartext();
+                                finish();
+                            }
+
                         }
-
                     }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -86,6 +102,15 @@ public class Registrar extends AppCompatActivity {
             startActivity(cancl);
         });
 
+    }
+
+    public void limpiartext() {
+
+        //txt
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        txtCelular.setText("");
+        txtContra.setText("");
     }
 
 }

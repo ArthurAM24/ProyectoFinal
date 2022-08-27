@@ -14,22 +14,25 @@
 
         <ImageView
             android:id="@+id/comida_image"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="Descripción" />
+
+            android:contentDescription="Descripción"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
 
         <TextView
             android:id="@+id/comida_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/blueg"
+            android:gravity="center"
             android:text="Nombre del Menú"
             android:textColor="@android:color/white"
-            android:background="#4f0e0d0e"
             android:textSize="20sp"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
+            />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

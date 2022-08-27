@@ -3,6 +3,7 @@ package com.example.proyectofinal;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Usuario;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,14 +26,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private static final String TAG ="Arti" ;
     private EditText txtCel;
     private EditText txtPassword;
 
     private Button btnLogin;
     private Button btnRegistra;
 
+    //PARA AUTENTIFICAR USUARIOS
+    private FirebaseAuth mAuth;
+    String TAG = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
         txtCel = findViewById(R.id.txt_cel);
         txtPassword = findViewById(R.id.txt_pass);
-
         btnLogin = findViewById(R.id.btn_confirm);
 
-        btnRegistra =  findViewById(R.id.btn_registrarse);
-
+        btnRegistra = findViewById(R.id.btn_registrarse);
+        //iniciar autentificación
+        mAuth = FirebaseAuth.getInstance();
         //iniciar firebase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("usuarios");
+
+
 
         btnLogin.setOnClickListener(v -> {
             if (!txtCel.getText().toString().isEmpty() && !txtPassword.getText().toString().isEmpty()) {
@@ -103,5 +112,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // do your stuff
+        } else {
+            signInAnonymously();
+        }
+    }
+
+    private void signInAnonymously() {
+
+        mAuth.signInAnonymously().addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        // do your stuff
+                        Log.d(TAG, "signInWithCustomToken:success");
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e(TAG, "signInAnonymously:FAILURE", exception);
+                    }
+                });
     }
 }
