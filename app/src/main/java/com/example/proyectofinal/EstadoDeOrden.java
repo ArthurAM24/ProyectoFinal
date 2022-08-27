@@ -33,7 +33,7 @@ public class EstadoDeOrden extends AppCompatActivity {
 
         //Inicia el firebase
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Pedidos");
+        requests = database.getReference("pedidos");
 
         recyclerView = findViewById(R.id.ListarOrden);
         recyclerView.setHasFixedSize(true);

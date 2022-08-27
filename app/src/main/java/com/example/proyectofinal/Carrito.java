@@ -48,7 +48,7 @@ public class Carrito extends AppCompatActivity {
         setContentView(R.layout.activity_carrito);
 
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Pedidos");
+        requests = database.getReference("pedidos");
 
         recyclerView = findViewById(R.id.listaCarrito);
         recyclerView.setHasFixedSize(true);

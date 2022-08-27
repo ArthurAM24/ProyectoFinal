@@ -50,7 +50,7 @@ public class ComidaDetalle extends AppCompatActivity {
 
         //FIREBASE
         database = FirebaseDatabase.getInstance();
-        comidas = database.getReference("Comidas");
+        comidas = database.getReference("comidas");
 
         //INICIO VIEW
 

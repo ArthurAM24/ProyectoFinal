@@ -32,7 +32,7 @@ public class Comidas extends AppCompatActivity {
 
         //FIREBASE
         database = FirebaseDatabase.getInstance();
-        comidaList=database.getReference("Comidas");
+        comidaList=database.getReference("comidas");
 
         recyclerView = findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
@@ -59,7 +59,7 @@ public class Comidas extends AppCompatActivity {
     //metodo cargar lista comidas
     private void cargarListaComidas(String categoriaID) {
         adapter= new FirebaseRecyclerAdapter<Comida, ComidaViewHolder>(Comida.class,R.layout.comidas_item,ComidaViewHolder.class,
-                comidaList.orderByChild("MenuID").equalTo(categoriaID)) {
+                comidaList.orderByChild("menuID").equalTo(categoriaID)) {
 
             protected void populateViewHolder(ComidaViewHolder comidaViewHolder, Comida comida, int i) {
             comidaViewHolder.Comida_Nombre.setText(comida.getNombre());
