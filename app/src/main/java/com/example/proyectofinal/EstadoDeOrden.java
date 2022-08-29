@@ -43,9 +43,7 @@ public class EstadoDeOrden extends AppCompatActivity {
         if (getIntent().getExtras() == null)
             loadOrders(Common.currentUser.getCelular());
         else
-            loadOrders(getIntent().getStringExtra("userCel"));
-        loadOrders(Common.currentUser.getCelular());
-
+            loadOrders(getIntent().getStringExtra("celular"));
     }
 
     private void loadOrders(String phone) {
@@ -61,7 +59,7 @@ public class EstadoDeOrden extends AppCompatActivity {
                 ordenViewHolder.txtOrdenID.setText(adapter.getRef(i).getKey());
                 ordenViewHolder.txtOrdenEstado.setText(Common.convertCodeToStatus(orden.getEstado()));
                 ordenViewHolder.txtNombre.setText(orden.getNombre());
-                ordenViewHolder.txtMesa.setText("Número de Mesa: "+orden.getNroMesa());
+                ordenViewHolder.txtMesa.setText("Número de Mesa: " + orden.getNroMesa());
 
                 ordenViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override

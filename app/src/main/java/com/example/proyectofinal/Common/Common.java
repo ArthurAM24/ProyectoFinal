@@ -11,11 +11,11 @@ public class Common {
 
     public static String convertCodeToStatus(String status) {
         if(status.equals("0"))
-            return  "Pedido Realizado.";
+            return  "PEDIDO REALIZADO";
         else if(status.equals("1"))
-            return "Pedido Siendo preparado.";
+            return "PEDIDO ATENDIDO!";
         else
-            return "Devilery Listo!";
+            return "PEDIDO LISTO!";
     }
 
     public static boolean isConnectedToInternet(Context context)

@@ -91,7 +91,9 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
 
         }
-
+        //registrar servicio
+       /* Intent service = new Intent(Inicio.this, ListenOrden.class);
+        startService(service);*/
     }
 
     private void loadMenu() {
@@ -105,11 +107,12 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
                         Picasso.with(getBaseContext()).load(model.getImage())
                                 .into(menuViewHolder.Menu_Imagen);
 
-                        Categoria clickItem = model;
+                        final Categoria clickItem = model;
 
                         menuViewHolder.setItemClickListener((view, position, isLongClick) -> {
-                            //Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
                             //Obtiene categoria y lo ennvia a la otra actividad
+
                             Intent comidaLista = new Intent(Inicio.this, Comidas.class);
                             comidaLista.putExtra("CategoriaID", adapter.getRef(position).getKey());
                             startActivity(comidaLista);
