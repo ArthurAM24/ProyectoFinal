@@ -12,7 +12,7 @@ import Interface.ItemClickListener;
 
 public class OrdenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtOrdenID, txtOrdenEstado, txtNombre, txtMesa;
+    public TextView txtOrdenID, txtOrdenEstado, txtNombre, txtMesa,txtCliente;
     private ItemClickListener itemClickListener;
 
     public OrdenViewHolder(@NonNull View itemView) {
@@ -21,6 +21,7 @@ public class OrdenViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtNombre = itemView.findViewById(R.id.orden_nombre);
         txtOrdenEstado = itemView.findViewById(R.id.orden_estado);
         txtOrdenID = itemView.findViewById(R.id.orden_id);
+        txtCliente= itemView.findViewById(R.id.orden_cliente);
 
         itemView.setOnClickListener(this);
     }

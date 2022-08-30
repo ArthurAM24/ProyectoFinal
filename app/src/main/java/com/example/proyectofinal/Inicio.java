@@ -74,11 +74,11 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         //Nombre de usuario
         View headerView = navigationView.getHeaderView(0);
-        txtFullName =  headerView.findViewById(R.id.txt_Fullnombre);
+        txtFullName = headerView.findViewById(R.id.txt_Fullnombre);
         txtFullName.setText(Common.currentUser.getNombres());
 
         //Cargar menu
-        recycler_menu =  findViewById(R.id.recycler_menu);
+        recycler_menu = findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
@@ -91,9 +91,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
 
         }
-        //registrar servicio
-       /* Intent service = new Intent(Inicio.this, ListenOrden.class);
-        startService(service);*/
+
     }
 
     private void loadMenu() {
@@ -110,7 +108,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
                         final Categoria clickItem = model;
 
                         menuViewHolder.setItemClickListener((view, position, isLongClick) -> {
-                            Toast.makeText(Inicio.this,""+clickItem.getNombre(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Inicio.this, "" + clickItem.getNombre(), Toast.LENGTH_SHORT).show();
                             //Obtiene categoria y lo ennvia a la otra actividad
 
                             Intent comidaLista = new Intent(Inicio.this, Comidas.class);
@@ -157,17 +155,17 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         } else if (id == R.id.nav_cart) {
 
-            Intent cartIntent = new Intent(Inicio.this,Carrito.class);
+            Intent cartIntent = new Intent(Inicio.this, Carrito.class);
             startActivity(cartIntent);
 
         } else if (id == R.id.nav_oders) {
-            Intent OrdIntent = new Intent(Inicio.this,EstadoDeOrden.class);
+            Intent OrdIntent = new Intent(Inicio.this, EstadoDeOrden.class);
             startActivity(OrdIntent);
 
         } else if (id == R.id.nav_log_out) {
 
             //Logout
-            Intent signIn = new Intent(Inicio.this,MainActivity.class);
+            Intent signIn = new Intent(Inicio.this, MainActivity.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
         }

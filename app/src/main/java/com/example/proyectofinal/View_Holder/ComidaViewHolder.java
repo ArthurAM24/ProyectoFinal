@@ -25,8 +25,8 @@ public class ComidaViewHolder extends RecyclerView.ViewHolder implements View.On
     public ComidaViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        Comida_Nombre = (TextView) itemView.findViewById(R.id.comida_name);
-        Comida_Imagen = (ImageView) itemView.findViewById(R.id.comida_image);
+        Comida_Nombre = itemView.findViewById(R.id.comida_name);
+        Comida_Imagen = itemView.findViewById(R.id.comida_image);
 
         itemView.setOnClickListener(this);
     }

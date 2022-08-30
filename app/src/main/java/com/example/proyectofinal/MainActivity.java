@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
+        txtCel.requestFocus();
+
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             // do your stuff

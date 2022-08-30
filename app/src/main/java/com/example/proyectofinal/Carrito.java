@@ -2,10 +2,11 @@ package com.example.proyectofinal;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Database.Database;
-import com.example.proyectofinal.Modelo.Pedido;
 import com.example.proyectofinal.Modelo.Orden;
+import com.example.proyectofinal.Modelo.Pedido;
 import com.example.proyectofinal.View_Holder.CarritoAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,8 +38,8 @@ public class Carrito extends AppCompatActivity {
     DatabaseReference requests;
 
     TextView txtTotalPrecio;
-    Button btnPlaceOrden;
-
+    Button btnPlaceOrden, btnCance, btnAcepta;
+    EditText edtMesa, nombreCliente;
     List<Pedido> carrito = new ArrayList<>();
     CarritoAdapter adapter;
 
@@ -59,10 +60,9 @@ public class Carrito extends AppCompatActivity {
         btnPlaceOrden = findViewById(R.id.btn_confirm);
 
         btnPlaceOrden.setOnClickListener(v -> {
-            if (!carrito.isEmpty())
-
+            if (!carrito.isEmpty()) {
                 MostrarAlerta();
-            else
+            } else
                 Toast.makeText(Carrito.this, "Carrito Vacio!", Toast.LENGTH_SHORT).show();
         });
 
@@ -70,44 +70,57 @@ public class Carrito extends AppCompatActivity {
     }
 
     //metodo Mostrar Alerta
-    private void MostrarAlerta() {
+    public void MostrarAlerta() {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Carrito.this);
-        alertDialog.setTitle("PideAltoq");
-        alertDialog.setMessage("Ingrese Número de Mesa:");
+        AlertDialog.Builder builder = new AlertDialog.Builder(Carrito.this);
+        LayoutInflater inflater = getLayoutInflater();
 
-        final EditText edtMesa = new EditText(Carrito.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-        edtMesa.setLayoutParams(lp);
-        alertDialog.setView(edtMesa);
-        //alertDialog.setView(R.drawable.ic_shopping_cart_black_24dp);
+        View view = inflater.inflate(R.layout.dialog_carrito, null);
 
-        alertDialog.setPositiveButton("SI", (dialog, which) -> {
+        builder.setView(view);
+
+        edtMesa = view.findViewById(R.id.dialog_mesa);
+        nombreCliente = view.findViewById(R.id.dialog_cliente);
+
+        final AlertDialog alertDialog = builder.create();
+
+
+        btnAcepta = view.findViewById(R.id.btnAceptarD);
+        btnCance = view.findViewById(R.id.btnCancelD);
+
+        btnAcepta.setOnClickListener(v -> {
+
             Orden request = new Orden(
                     Common.currentUser.getCelular(),
                     Common.currentUser.getNombres(),
+                    nombreCliente.getText().toString(),
                     edtMesa.getText().toString(),
                     txtTotalPrecio.getText().toString(),
                     carrito
+
             );
 
-            //Add to Firebase+
+            //agrega a firebase
             requests.child(String.valueOf(System.currentTimeMillis()))
                     .setValue(request);
 
             //Eliminar Carrito
+
             new Database(getBaseContext()).limpíaCarrito();
             Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
+
+        alertDialog.dismiss();
             finish();
+
         });
 
-        alertDialog.setNegativeButton("NO", (dialogInterface, which) -> dialogInterface.dismiss());
-        alertDialog.show();
+        btnCance.setOnClickListener(v -> {
+            alertDialog.dismiss();
+        });
 
+        alertDialog.show();
     }
+
 
     @SuppressLint("NotifyDataSetChanged")
     private void CargarListaComidas() {
@@ -136,7 +149,7 @@ public class Carrito extends AppCompatActivity {
     }
 
     private void deleteCart(int position) {
-        //delete by position from List<Order>
+
         carrito.remove(position);
         new Database(this).limpíaCarrito();
         for (Pedido item : carrito) {

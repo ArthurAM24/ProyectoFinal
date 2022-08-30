@@ -1,7 +1,6 @@
 package com.example.proyectofinal;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +12,6 @@ import com.example.proyectofinal.View_Holder.OrdenViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import Interface.ItemClickListener;
 
 public class EstadoDeOrden extends AppCompatActivity {
 
@@ -56,19 +53,16 @@ public class EstadoDeOrden extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(OrdenViewHolder ordenViewHolder, Orden orden, int i) {
-                ordenViewHolder.txtOrdenID.setText(adapter.getRef(i).getKey());
-                ordenViewHolder.txtOrdenEstado.setText(Common.convertCodeToStatus(orden.getEstado()));
-                ordenViewHolder.txtNombre.setText(orden.getNombre());
-                ordenViewHolder.txtMesa.setText("Número de Mesa: " + orden.getNroMesa());
+                ordenViewHolder.txtOrdenID.setText(String.format("Orden ID: %s",adapter.getRef(i).getKey()));
+                ordenViewHolder.txtOrdenEstado.setText(String.format("Estado: %s",Common.convertCodeToStatus(orden.getEstado())));
+                ordenViewHolder.txtNombre.setText(String.format("Mesero: %s",orden.getNombre()));
+                ordenViewHolder.txtMesa.setText(String.format("Número de Mesa: %s",orden.getNroMesa()));
+                ordenViewHolder.txtCliente.setText(String.format("Cliente: %s",orden.getCliente()));
 
-                ordenViewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
+                ordenViewHolder.setItemClickListener((view, position, isLongClick) -> {
 
-                    }
                 });
             }
-
 
         };
 

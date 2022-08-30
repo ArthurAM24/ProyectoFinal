@@ -5,6 +5,7 @@ import java.util.List;
 public class Orden {
     private String celular;
     private String nombre;
+    private String cliente;
     private String NroMesa;
     private String total;
     private String estado;
@@ -13,23 +14,17 @@ public class Orden {
     public Orden() {
     }
 
-    public Orden(String celular, String nombre, String nroMesa, String total, List<Pedido> comidas) {
+    public Orden(String celular, String nombre, String cliente, String nroMesa, String total,  List<Pedido> comidas) {
         this.celular = celular;
         this.nombre = nombre;
+        this.cliente = cliente;
         NroMesa = nroMesa;
         this.total = total;
         this.comidas = comidas;
-        this.estado="0";// default 0, atendido 1, listo 2
+        this.estado = "0";// default 0, atendido 1, listo 2
+
     }
 
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public String getCelular() {
         return celular;
@@ -47,6 +42,14 @@ public class Orden {
         this.nombre = nombre;
     }
 
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
     public String getNroMesa() {
         return NroMesa;
     }
@@ -61,6 +64,14 @@ public class Orden {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public List<Pedido> getComidas() {

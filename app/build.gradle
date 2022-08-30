@@ -61,6 +61,6 @@ dependencies {
 
     implementation files('libs/com.amulyakhare.textdrawable-1.0.1.jar')
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
-
+    implementation 'info.hoang8f:fbutton:1.0.5'
 
 }

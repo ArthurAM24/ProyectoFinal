@@ -1,68 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="9"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/orden_id"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="10dp"
-                android:text="11111"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:layout_weight="9"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/orden_estado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="10dp"
-                android:text="Estado"
-                android:textAllCaps="true"
-                android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/orden_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="10dp"
+                    android:text="Orden ID"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/orden_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="10dp"
-                android:text="SEBAS"
-                android:textAllCaps="true"
-                android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/orden_estado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="10dp"
+                    android:text="Estado"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/orden_mesa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="10dp"
-                android:text="14"
-                android:textAllCaps="true"
-                android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/orden_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="10dp"
+                    android:text="MESERO"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/orden_mesa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="10dp"
+                    android:text="Numero de Mesa"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/orden_cliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="10dp"
+                    android:text="Cliente"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
 
+            </LinearLayout>
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
