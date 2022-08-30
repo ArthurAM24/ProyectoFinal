@@ -106,7 +106,7 @@ public class Carrito extends AppCompatActivity {
 
             //Eliminar Carrito
 
-            new Database(getBaseContext()).limpíaCarrito();
+            new Database(getBaseContext()).limpíaCarrito(Common.currentUser.getCelular());
             Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
 
         alertDialog.dismiss();
@@ -114,9 +114,7 @@ public class Carrito extends AppCompatActivity {
 
         });
 
-        btnCance.setOnClickListener(v -> {
-            alertDialog.dismiss();
-        });
+        btnCance.setOnClickListener(v -> alertDialog.dismiss());
 
         alertDialog.show();
     }
@@ -124,7 +122,7 @@ public class Carrito extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void CargarListaComidas() {
-        carrito = new Database(this).getCarrito();
+        carrito = new Database(this).getCarrito(Common.currentUser.getCelular());
         adapter = new CarritoAdapter(carrito, this);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -151,7 +149,7 @@ public class Carrito extends AppCompatActivity {
     private void deleteCart(int position) {
 
         carrito.remove(position);
-        new Database(this).limpíaCarrito();
+        new Database(this).limpíaCarrito(Common.currentUser.getCelular());
         for (Pedido item : carrito) {
             new Database(this).agregarAlCarrito(item);
         }

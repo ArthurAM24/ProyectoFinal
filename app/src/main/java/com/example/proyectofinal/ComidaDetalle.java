@@ -58,6 +58,7 @@ public class ComidaDetalle extends AppCompatActivity {
         btnCarrito.setOnClickListener(v -> {
 
             new Database(getBaseContext()).agregarAlCarrito(new Pedido(
+                    Common.currentUser.getCelular(),
                     comidaID,
                     comidaActual.getNombre(),
                     Cantidad.getText().toString(),

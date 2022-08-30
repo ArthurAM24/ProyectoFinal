@@ -1,6 +1,7 @@
 package com.example.proyectofinal.Modelo;
 
 public class Pedido {
+    private String UsercelID;
     private String ProductoID;
     private String ProductoNomb;
     private String Cantidad;
@@ -10,12 +11,21 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String productoID, String productoNomb, String cantidad, String precio, String descuento) {
+    public Pedido(String usercelID, String productoID, String productoNomb, String cantidad, String precio, String descuento) {
+        UsercelID = usercelID;
         ProductoID = productoID;
         ProductoNomb = productoNomb;
         Cantidad = cantidad;
         Precio = precio;
         Descuento = descuento;
+    }
+
+    public String getUsercelID() {
+        return UsercelID;
+    }
+
+    public void setUsercelID(String usercelID) {
+        UsercelID = usercelID;
     }
 
     public String getProductoID() {
