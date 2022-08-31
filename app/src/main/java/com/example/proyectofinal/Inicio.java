@@ -14,25 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Categoria;
-import com.example.proyectofinal.Modelo.Token;
 import com.example.proyectofinal.View_Holder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private AppBarConfiguration mAppBarConfiguration;
 
 
     FirebaseDatabase database;
@@ -77,7 +72,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         //Nombre de usuario
         View headerView = navigationView.getHeaderView(0);
         txtFullName = headerView.findViewById(R.id.txt_Fullnombre);
-        txtFullName.setText(Common.currentUser.getNombres());
+//        txtFullName.setText(Common.currentUser.getNombres());
 
         //Cargar menu
         recycler_menu = findViewById(R.id.recycler_menu);
@@ -91,14 +86,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         } else {
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
         }
-        actualizaToken(FirebaseInstanceId.getInstance().getToken());
-    }
 
-    private void actualizaToken(String token) {
-        FirebaseDatabase db= FirebaseDatabase.getInstance();
-        DatabaseReference tokens = db.getReference("Tokens");
-        Token data=new Token(token,false);
-        tokens.child(Common.currentUser.getCelular()).setValue(data);
     }
 
     private void loadMenu() {
@@ -144,7 +132,6 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

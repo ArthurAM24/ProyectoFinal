@@ -71,8 +71,8 @@ public class ComidaDetalle extends AppCompatActivity {
 
 
         comida_descripcion = findViewById(R.id.comida_descripcion);
-        comida_nombre =  findViewById(R.id.comida_name);
-        comida_precio =  findViewById(R.id.comida_precio);
+        comida_nombre = findViewById(R.id.comida_name);
+        comida_precio = findViewById(R.id.comida_precio);
         comida_imagen = findViewById(R.id.img_comida);
 
 

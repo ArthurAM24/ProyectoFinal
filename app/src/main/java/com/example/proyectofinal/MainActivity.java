@@ -13,9 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Usuario;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtCel;
     private EditText txtPassword;
 
-    private Button btnLogin;
-    private Button btnRegistra;
-
     //PARA AUTENTIFICAR USUARIOS
     private FirebaseAuth mAuth;
     String TAG = "";
@@ -43,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         txtCel = findViewById(R.id.txt_cel);
         txtPassword = findViewById(R.id.txt_pass);
-        btnLogin = findViewById(R.id.btn_confirm);
+        Button btnLogin = findViewById(R.id.btn_confirm);
 
-        btnRegistra = findViewById(R.id.btn_registrarse);
+        Button btnRegistra = findViewById(R.id.btn_registrarse);
         //iniciar autentificación
         mAuth = FirebaseAuth.getInstance();
         //iniciar firebase
@@ -73,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                                 Usuario user = snapshot.child(txtCel.getText().toString()).getValue(Usuario.class);
                                 user.setCelular(txtCel.getText().toString()); //SET celular
 
-                                String usert = "false";
 
                                 if (user.getPassword().equals(txtPassword.getText().toString())) {
                                     Toast.makeText(MainActivity.this, "Bienvenido!", Toast.LENGTH_SHORT).show();
@@ -130,18 +123,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void signInAnonymously() {
 
-        mAuth.signInAnonymously().addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        // do your stuff
-                        Log.d(TAG, "signInWithCustomToken:success");
-                    }
+        mAuth.signInAnonymously().addOnSuccessListener(this, authResult -> {
+                    // do your stuff
+                    Log.d(TAG, "signInWithCustomToken:success");
                 })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.e(TAG, "signInAnonymously:FAILURE", exception);
-                    }
-                });
+                .addOnFailureListener(this, exception -> Log.e(TAG, "signInAnonymously:FAILURE", exception));
     }
 }

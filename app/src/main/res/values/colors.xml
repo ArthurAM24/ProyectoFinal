@@ -12,6 +12,7 @@
     <color name="overlayBG">#7f333639</color>
     <color name="overlayAB">#0e0d0e</color>
     <color name="grey">#646b63</color>
+    <color name="semib">#FFD8D4D4</color>
 
 
 </resources>
