@@ -20,12 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Categoria;
+import com.example.proyectofinal.Modelo.Token;
 import com.example.proyectofinal.View_Holder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,12 +88,17 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         if (Common.isConnectedToInternet(this)) {
             loadMenu();
-            //Toast.makeText(this, "Conectado a Internet!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
-
         }
+        actualizaToken(FirebaseInstanceId.getInstance().getToken());
+    }
 
+    private void actualizaToken(String token) {
+        FirebaseDatabase db= FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data=new Token(token,false);
+        tokens.child(Common.currentUser.getCelular()).setValue(data);
     }
 
     private void loadMenu() {

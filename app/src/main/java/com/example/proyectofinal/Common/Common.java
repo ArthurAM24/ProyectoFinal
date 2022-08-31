@@ -5,8 +5,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.example.proyectofinal.Modelo.Usuario;
+import com.example.proyectofinal.Remote.ApiService;
+import com.example.proyectofinal.Remote.RetrofitClient;
 
 public class Common {
+
+    //de notificaciones
+    private  static final String BASE_URL="https://fcm.googleapis.com/";
+    public static ApiService getFCMService(){
+        return RetrofitClient.getClient(BASE_URL).create(ApiService.class);
+    }
+
     public static Usuario currentUser;
 
     public static String convertCodeToStatus(String status) {
@@ -37,7 +46,8 @@ public class Common {
         return false;
     }
 
-    public static final String DELETE = "Delete";
+    public static final String DELETE = "Eliminar";
+
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
 

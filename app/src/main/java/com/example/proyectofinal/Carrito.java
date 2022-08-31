@@ -2,6 +2,7 @@ package com.example.proyectofinal;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,16 +19,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Database.Database;
+import com.example.proyectofinal.Modelo.MyResponse;
+import com.example.proyectofinal.Modelo.MySender;
+import com.example.proyectofinal.Modelo.Notificacion;
 import com.example.proyectofinal.Modelo.Orden;
 import com.example.proyectofinal.Modelo.Pedido;
+import com.example.proyectofinal.Modelo.Token;
+import com.example.proyectofinal.Remote.ApiService;
 import com.example.proyectofinal.View_Holder.CarritoAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Carrito extends AppCompatActivity {
 
@@ -43,10 +57,14 @@ public class Carrito extends AppCompatActivity {
     List<Pedido> carrito = new ArrayList<>();
     CarritoAdapter adapter;
 
+    ApiService mService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
+        //Inicia API
+        mService= Common.getFCMService();
 
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("pedidos");
@@ -99,24 +117,61 @@ public class Carrito extends AppCompatActivity {
                     carrito
 
             );
-
+            String orden_num = String.valueOf(System.currentTimeMillis());
             //agrega a firebase
-            requests.child(String.valueOf(System.currentTimeMillis()))
+            requests.child(orden_num)
                     .setValue(request);
-
             //Eliminar Carrito
-
             new Database(getBaseContext()).limpíaCarrito(Common.currentUser.getCelular());
-            Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
-
-        alertDialog.dismiss();
-            finish();
+            enviaNotificacionOrden(orden_num);
 
         });
 
         btnCance.setOnClickListener(v -> alertDialog.dismiss());
-
         alertDialog.show();
+    }
+
+    private void enviaNotificacionOrden(String orden_num) {
+        DatabaseReference tokens= FirebaseDatabase.getInstance().getReference("Tokens");
+        Query data= tokens.orderByChild("isServerToken").equalTo(true);
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                    Token serverToken= postSnapshot.getValue(Token.class);
+                    //llama al metodo
+                    Notificacion notificacion = new Notificacion("PideAltoque","Tienes una nueva Orden Pendiente"+orden_num);
+                    MySender content= new MySender(serverToken.getToken(),notificacion);
+                    mService.sendNotification(content)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if (response.body().success==1){
+
+                                        Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
+                                        //alertDialog.dismiss();
+                                        finish();
+                                    }
+                                    else{
+                                        Toast.makeText(Carrito.this,"Error!",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+                                    Log.e("Error",t.getMessage());
+
+                                }
+                            });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

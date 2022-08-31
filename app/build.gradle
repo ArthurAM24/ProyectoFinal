@@ -47,11 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //Add library
+    //librearias
     implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
-    implementation 'com.google.firebase:firebase-database:19.3.0'
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
+
 
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
@@ -59,8 +57,19 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+    //libreria de botones
     implementation files('libs/com.amulyakhare.textdrawable-1.0.1.jar')
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     implementation 'info.hoang8f:fbutton:1.0.5'
+
+    //libreria de firebase
+    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    implementation 'com.google.firebase:firebase-database:19.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+
+    //para mensajeria
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
 }
