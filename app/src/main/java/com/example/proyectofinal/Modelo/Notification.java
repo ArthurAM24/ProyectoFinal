@@ -1,10 +1,10 @@
 package com.example.proyectofinal.Modelo;
 
-public class Notificacion {
+public class Notification {
     public String body;
     public String title;
 
-    public Notificacion(String body, String title) {
+    public Notification(String body, String title) {
         this.body = body;
         this.title = title;
     }

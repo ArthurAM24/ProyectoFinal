@@ -4,6 +4,9 @@ public class Token {
     private String token;
     private boolean isServertoken;
 
+    public Token() {
+    }
+
     public Token(String token, boolean isServertoken) {
         this.token = token;
         this.isServertoken = isServertoken;
@@ -25,3 +28,4 @@ public class Token {
         isServertoken = servertoken;
     }
 }
+

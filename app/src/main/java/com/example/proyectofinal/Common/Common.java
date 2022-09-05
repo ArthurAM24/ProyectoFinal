@@ -5,18 +5,20 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.example.proyectofinal.Modelo.Usuario;
-import com.example.proyectofinal.Remote.ApiService;
+import com.example.proyectofinal.Remote.APIService;
 import com.example.proyectofinal.Remote.RetrofitClient;
 
 public class Common {
-
-    //de notificaciones
-    private  static final String BASE_URL="https://fcm.googleapis.com/";
-    public static ApiService getFCMService(){
-        return RetrofitClient.getClient(BASE_URL).create(ApiService.class);
-    }
-
     public static Usuario currentUser;
+    //de notificaciones
+    public static final String BASE_URL2="https://fcm.googleapis.com/fcm/send";
+    public static final String BASE_URL="https://fcm.googleapis.com";
+    public static final String SERVER_KEY="key=AAAAaUjIgdA:APA91bF5m_C2TF_T6Q_gWE4RRRZxIVYKm7L6xMhVO391FXoEPMNs2BfmUrgoEgOw8gjujklUB4QU7ug4Xz_NmVp_PvmtAf6QTe_BFs9vCw3AJVtk4HYw8tpJmxCAFKwUleKjm8lVYCuL";
+
+    public static APIService getFCMService(){
+
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+    }
 
     public static String convertCodeToStatus(String status) {
         if(status.equals("0"))
@@ -48,8 +50,6 @@ public class Common {
 
     public static final String DELETE = "Eliminar";
 
-    public static final String USER_KEY = "User";
-    public static final String PWD_KEY = "Password";
-
 }
+
 
