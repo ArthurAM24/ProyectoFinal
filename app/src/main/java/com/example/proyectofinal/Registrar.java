@@ -42,20 +42,19 @@ public class Registrar extends AppCompatActivity {
         final DatabaseReference table_user = database.getReference("usuarios");
 
         btnRegistra.setOnClickListener(v -> {
+            if (txtCelular.getText().toString().isEmpty()
+                    || txtNombre.getText().toString().isEmpty()
+                    || txtCorreo.getText().toString().isEmpty()
+                    || txtContra.getText().toString().isEmpty()) {
 
-            if (Common.isConnectedToInternet(getBaseContext())) {
+                Toast.makeText(Registrar.this, "Ingrese datos", Toast.LENGTH_SHORT).show();
+            } else if (txtCelular.getText().length() > 0 && txtCelular.getText().length() < 9) {
+                Toast.makeText(Registrar.this, "Ingrese un Número de celular de 9 Dígitos", Toast.LENGTH_SHORT).show();
+            } else if (Common.isConnectedToInternet(getBaseContext())) {
 
                 final ProgressDialog mDialog = new ProgressDialog(Registrar.this);
                 mDialog.setMessage("Porfavor espere...");
                 mDialog.show();
-
-                if (txtCelular.getText().toString().isEmpty()
-                        || txtNombre.getText().toString().isEmpty()
-                        || txtCorreo.getText().toString().isEmpty()
-                        || txtContra.getText().toString().isEmpty()) {
-
-                    Toast.makeText(Registrar.this, "Ingrese datos", Toast.LENGTH_SHORT).show();
-                }
 
                 table_user.addValueEventListener(new ValueEventListener() {
 
@@ -91,10 +90,13 @@ public class Registrar extends AppCompatActivity {
 
                     }
                 });
+
             } else {
                 Toast.makeText(Registrar.this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
 
             }
+
+
         });
 
         btnCancel.setOnClickListener(v -> {
