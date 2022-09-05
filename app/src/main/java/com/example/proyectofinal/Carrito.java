@@ -109,30 +109,29 @@ public class Carrito extends AppCompatActivity {
         alertDialog.show();
 
         btnAcepta.setOnClickListener(v -> {
+            if (!edtMesa.getText().toString().isEmpty() && !nombreCliente.getText().toString().isEmpty()) {
+                Orden request = new Orden(
+                        Common.currentUser.getCelular(),
+                        Common.currentUser.getNombres(),
+                        nombreCliente.getText().toString(),
+                        edtMesa.getText().toString(),
+                        txtTotalPrecio.getText().toString(),
+                        carrito
 
-            Orden request = new Orden(
-                    Common.currentUser.getCelular(),
-                    Common.currentUser.getNombres(),
-                    // nombreCliente.getText().toString(),
-                    // edtMesa.getText().toString(),
-                    "Pedro",
-                    "12",
-                    txtTotalPrecio.getText().toString(),
-                    carrito
+                );
+                String orden_num = String.valueOf(System.currentTimeMillis());
 
-            );
-            String orden_num = String.valueOf(System.currentTimeMillis());
-            //agrega a firebase
-            requests.child(orden_num)
-                    .setValue(request);
+                //agrega a firebase
+                requests.child(orden_num)
+                        .setValue(request);
 
-            enviaNotificacionOrden(orden_num);
-            //Eliminar Carrito
-            new Database(getBaseContext()).limpíaCarrito(Common.currentUser.getCelular());
-            alertDialog.dismiss();
-           /* Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
-            alertDialog.dismiss();
-            finish();*/
+                enviaNotificacionOrden(orden_num);
+                //Eliminar Carrito
+                new Database(getBaseContext()).limpíaCarrito(Common.currentUser.getCelular());
+                alertDialog.dismiss();
+            }else {
+                Toast.makeText(Carrito.this, "Ingrese datos", Toast.LENGTH_SHORT).show();
+            }
         });
 
         btnCance.setOnClickListener(v -> alertDialog.dismiss());
@@ -156,9 +155,7 @@ public class Carrito extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                                     if (response.body().success == 1) {
-
                                         Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
-
                                         finish();
                                     } else {
                                         Toast.makeText(Carrito.this, "Error!", Toast.LENGTH_SHORT).show();
