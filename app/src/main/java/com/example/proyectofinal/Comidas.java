@@ -65,7 +65,7 @@ public class Comidas extends AppCompatActivity {
             comidaViewHolder.Comida_Nombre.setText(comida.getNombre());
                 Picasso.with(getBaseContext()).load(comida.getImage()).into(comidaViewHolder.Comida_Imagen);
 
-                final Comida local=comida;
+
                 comidaViewHolder.setItemClickListener((view, position, isLongClick) -> {
                     //INICIAMOS LA ACTIVIDAD DETALLE
                     Intent Comida_Detalle= new Intent(Comidas.this,ComidaDetalle.class);
