@@ -18,5 +18,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="User" />
+        android:text="@string/user_header_inicio" />
 </LinearLayout>

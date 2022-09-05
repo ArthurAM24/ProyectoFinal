@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total: "
+                    android:text="@string/total_carrito"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
@@ -42,7 +42,7 @@
                     android:id="@+id/total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S/. 000"
+                    android:text="@string/s_000_carrito"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
 
@@ -62,7 +62,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="15dp"
                 android:backgroundTint="@color/design_default_color_primary_dark"
-                android:text="Confirmar Orden"
+                android:text="@string/confirmar_orden_carrito"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
