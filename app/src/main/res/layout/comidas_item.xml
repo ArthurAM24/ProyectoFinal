@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:contentDescription="Descripción"
+            android:contentDescription="@string/descripci_n_carrito_layout"
             android:scaleType="centerCrop"
             android:src="@drawable/background" />
 
@@ -28,7 +28,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/blueg"
             android:gravity="center"
-            android:text="Nombre del Menú"
+            android:text="@string/nombre_del_men_carrito_layout"
             android:textColor="@android:color/white"
             android:textSize="20sp"
 

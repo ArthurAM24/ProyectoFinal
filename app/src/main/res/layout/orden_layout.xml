@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="10dp"
-                    android:text="Orden ID"
+                    android:text="@string/OrdenId"
                     android:textAllCaps="true"
                     android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="10dp"
-                    android:text="Estado"
+                    android:text="@string/Estado"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="10dp"
-                    android:text="MESERO"
+                    android:text="@string/Mesero"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 
@@ -56,16 +56,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="10dp"
-                    android:text="Numero de Mesa"
+                    android:text="@string/Numero_de_mesa"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
+
                 <TextView
                     android:id="@+id/orden_cliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="10dp"
-                    android:text="Cliente"
+                    android:text="@string/Cliente"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 

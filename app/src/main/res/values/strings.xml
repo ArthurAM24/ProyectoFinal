@@ -47,4 +47,35 @@
     <string name="_0_00">0.00</string>
     <string name="comidanames">comidaname</string>
     <string name="init_carritos">init_carrito</string>
+
+    //Carrito
+    <string name="total_carrito">Total:</string>
+    <string name="s_000_carrito">S/. 000</string>
+    <string name="confirmar_orden_carrito">Confirmar Orden</string>
+
+    //Comida detalle
+    <string name="soles"> </string>
+
+    //Carrito_layout
+    <string name="descripci_n_carrito_layout">Descripción</string>
+    <string name="nombre_del_men_carrito_layout">Nombre del Menú</string>
+
+    //Dialog_carrito
+    <string name="ingrese_n_mero_de_mesa_dialog_carrito">Ingrese Número de Mesa</string>
+    <string name="ingrese_nombre_del_cliente_dilog_carrito">Ingrese Nombre del Cliente</string>
+    <string name="cancelar_dialog_carrito">Cancelar</string>
+    <string name="aceptar_dialog_carrito">Aceptar</string>
+    //Menu_item
+    <string name="Descripcion_menu_item">Descripcion</string>
+    <string name="Nombre_del_menu">Nombre del Menu</string>
+
+    //Header_inicio
+    <string name="user_header_inicio">User</string>
+
+    //Order Layout
+    <string name="OrdenId">Orden ID</string>
+    <string name="Estado">Estado</string>
+    <string name="Mesero">Mesero</string>
+    <string name="Numero_de_mesa">Numero de Mesa</string>
+    <string name="Cliente">Cliente</string>
 </resources>
