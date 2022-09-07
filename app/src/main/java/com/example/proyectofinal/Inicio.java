@@ -178,10 +178,8 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             startActivity(OrdIntent);
 
         } else if (id == R.id.nav_log_out) {
-
             //Delete remember
             Paper.book().destroy();
-
             //Logout
             Intent signIn = new Intent(Inicio.this, MainActivity.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
