@@ -2,14 +2,14 @@ package com.example.proyectofinal.Modelo;
 
 public class Token {
     private String token;
-    private boolean isServertoken;
+    private boolean Servertoken;
 
     public Token() {
     }
 
-    public Token(String token, boolean isServertoken) {
+    public Token(String token, boolean servertoken) {
         this.token = token;
-        this.isServertoken = isServertoken;
+        Servertoken = servertoken;
     }
 
     public String getToken() {
@@ -21,11 +21,11 @@ public class Token {
     }
 
     public boolean isServertoken() {
-        return isServertoken;
+        return Servertoken;
     }
 
     public void setServertoken(boolean servertoken) {
-        isServertoken = servertoken;
+        Servertoken = servertoken;
     }
 }
 

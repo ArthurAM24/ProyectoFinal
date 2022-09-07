@@ -17,24 +17,24 @@
             android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/logo"
-            android:contentDescription="@string/ini_title" />
+            android:contentDescription="@string/ini_title"
+            app:srcCompat="@drawable/logo" />
 
         <EditText
             android:id="@+id/txt_cel"
-            android:maxLength="9"
             android:layout_width="330dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:autofillHints=""
             android:background="@drawable/shape"
             android:ems="20"
             android:hint="@string/txt_cel"
             android:inputType="number"
+            android:maxLength="9"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/grey"
-            android:textSize="20sp"
-            android:autofillHints="" />
+            android:textSize="20sp" />
 
 
         <EditText
@@ -42,17 +42,31 @@
             android:layout_width="330dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:autofillHints=""
             android:background="@drawable/shape"
             android:ems="20"
-            android:textColorHint="@color/grey"
-            android:textColor="@color/black"
             android:hint="@string/txt_pass"
             android:inputType="textPassword"
             android:padding="10dp"
+            android:textColor="@color/black"
 
-            android:textSize="20sp"
-            android:autofillHints="" />
+            android:textColorHint="@color/grey"
+            android:textSize="20sp" />
 
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cboRecordar"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:checked="true"
+            android:gravity="center_vertical"
+            android:text="@string/cboRecordar"
+            android:textColor="@color/white">
+
+        </com.rey.material.widget.CheckBox>
 
         <Button
             android:id="@+id/btn_confirm"

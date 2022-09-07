@@ -2,6 +2,7 @@ package com.example.proyectofinal;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,6 +88,10 @@ public class Carrito extends AppCompatActivity {
         CargarListaComidas();
     }
 
+    public void onStop() {
+        super.onStop();
+    }
+
     //metodo Mostrar Alerta
     public void MostrarAlerta() {
 
@@ -129,7 +134,8 @@ public class Carrito extends AppCompatActivity {
                 //Eliminar Carrito
                 new Database(getBaseContext()).limpíaCarrito(Common.currentUser.getCelular());
                 alertDialog.dismiss();
-            }else {
+
+            } else {
                 Toast.makeText(Carrito.this, "Ingrese datos", Toast.LENGTH_SHORT).show();
             }
         });
@@ -142,26 +148,27 @@ public class Carrito extends AppCompatActivity {
 
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         Query data = tokens.orderByChild("servertoken").equalTo(true);
-
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Token serverToken = postSnapshot.getValue(Token.class);
+
                     Notification notificacion = new Notification("PideAltoque", "Tienes una nueva Orden Pendiente: " + orden_num);
                     Sender content = new Sender(serverToken.getToken(), notificacion);
                     mService.sendNotification(content)
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
                                 public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                                    if (response.body().success == 1) {
-                                        Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else {
-                                        Toast.makeText(Carrito.this, "Error!", Toast.LENGTH_SHORT).show();
+                                    if (response.code() == 200) {
+                                        if (response.body().success == 1) {
+                                            Toast.makeText(Carrito.this, "Gracias, su orden ha sido enviada.", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        } else {
+                                            Toast.makeText(Carrito.this, "Error!", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
-
                                 @Override
                                 public void onFailure(Call<MyResponse> call, Throwable t) {
 
@@ -175,6 +182,8 @@ public class Carrito extends AppCompatActivity {
 
             }
         });
+
+        // }
 
 
     }

@@ -134,4 +134,7 @@ public class ComidaDetalle extends AppCompatActivity {
             }
         });
     }
+    public void onStop() {
+        super.onStop();
+    }
 }

@@ -114,5 +114,7 @@ public class Registrar extends AppCompatActivity {
         txtCelular.setText("");
         txtContra.setText("");
     }
-
+    public void onStop() {
+        super.onStop();
+    }
 }

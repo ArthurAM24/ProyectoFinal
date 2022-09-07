@@ -78,4 +78,7 @@ public class Comidas extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
+    public void onStop() {
+        super.onStop();
+    }
 }

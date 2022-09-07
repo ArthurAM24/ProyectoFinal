@@ -68,6 +68,8 @@ public class EstadoDeOrden extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
+    public void onStop() {
+        super.onStop();
+    }
 
 }

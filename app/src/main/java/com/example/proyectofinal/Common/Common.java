@@ -9,6 +9,9 @@ import com.example.proyectofinal.Remote.APIService;
 import com.example.proyectofinal.Remote.RetrofitClient;
 
 public class Common {
+    //Guarda user y pass
+    public static final String USER_K = "usuario";
+    public static final String PASS_K = "password";
     //Elimina pedido
     public static final String DELETE = "Eliminar";
     //Obtiene usuario
@@ -49,8 +52,6 @@ public class Common {
         }
         return false;
     }
-
-
 }
 
 

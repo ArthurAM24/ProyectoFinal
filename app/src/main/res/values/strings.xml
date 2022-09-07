@@ -6,6 +6,7 @@
     <string name="txt_pass">Contraseña</string>
     <string name="btn_login">Iniciar Sesión</string>
     <string name="btn_registrar">Registrarse</string>
+    <string name="cboRecordar">Recordarme</string>
 
     //REGISTRO
     <string name="txt_nombre">Nombres</string>

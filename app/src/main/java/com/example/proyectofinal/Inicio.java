@@ -1,6 +1,8 @@
 package com.example.proyectofinal;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,16 +21,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal.Common.Common;
 import com.example.proyectofinal.Modelo.Categoria;
+import com.example.proyectofinal.Modelo.Token;
+import com.example.proyectofinal.Modelo.Usuario;
 import com.example.proyectofinal.View_Holder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
-public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import io.paperdb.Paper;
 
+public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase database;
     DatabaseReference category;
@@ -36,7 +45,6 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
-
 
     FirebaseRecyclerAdapter<Categoria, MenuViewHolder> adapter;
 
@@ -53,13 +61,14 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         database = FirebaseDatabase.getInstance();
         category = database.getReference("categoria");
 
+        Paper.init(this);
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(v -> {
             Intent carritoInten = new Intent(Inicio.this, Carrito.class);
             startActivity(carritoInten);
         });
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,7 +81,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         //Nombre de usuario
         View headerView = navigationView.getHeaderView(0);
         txtFullName = headerView.findViewById(R.id.txt_Fullnombre);
-//        txtFullName.setText(Common.currentUser.getNombres());
+        txtFullName.setText(Common.currentUser.getNombres());
 
         //Cargar menu
         recycler_menu = findViewById(R.id.recycler_menu);
@@ -87,7 +96,19 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             Toast.makeText(this, "Porfavor revise su conexión a Internet!", Toast.LENGTH_SHORT).show();
         }
 
+        actualizaToken(FirebaseInstanceId.getInstance().getToken());
     }
+    public void onStop() {
+        super.onStop();
+    }
+    private void actualizaToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token, false);
+        tokens.child(Common.currentUser.getCelular()).setValue(data);
+
+    }
+
 
     private void loadMenu() {
 
@@ -158,6 +179,9 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
         } else if (id == R.id.nav_log_out) {
 
+            //Delete remember
+            Paper.book().destroy();
+
             //Logout
             Intent signIn = new Intent(Inicio.this, MainActivity.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -168,4 +192,5 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
