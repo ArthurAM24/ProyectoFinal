@@ -79,4 +79,10 @@
     <string name="Mesero">Mesero</string>
     <string name="Numero_de_mesa">Numero de Mesa</string>
     <string name="Cliente">Cliente</string>
+
+    //CUADRO DE DIALOGO
+    <string name="titulo">Eliminar</string>
+    <string name="cuerpo">¿Esta seguro de eliminar?</string>
+    <string name="btnSI">Si</string>
+    <string name="btNO">No</string>
 </resources>

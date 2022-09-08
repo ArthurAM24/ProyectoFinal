@@ -1,8 +1,8 @@
 package com.example.proyectofinal;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -210,18 +210,30 @@ public class Carrito extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if (item.getTitle().equals(Common.DELETE))
-            deleteCart(item.getOrder());
+            EliminarCarrito(item.getOrder());
         return true;
     }
 
-    private void deleteCart(int position) {
+    private void EliminarCarrito(int position) {
 
-        carrito.remove(position);
-        new Database(this).limpíaCarrito(Common.currentUser.getCelular());
-        for (Pedido item : carrito) {
-            new Database(this).agregarAlCarrito(item);
-        }
-        CargarListaComidas();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.titulo);
+        builder.setMessage(R.string.cuerpo);
+        builder.setPositiveButton("SI", (dialog, i) -> {
+
+            carrito.remove(position);
+            new Database(this).limpíaCarrito(Common.currentUser.getCelular());
+            for (Pedido item : carrito) {
+                new Database(this).agregarAlCarrito(item);
+            }
+            CargarListaComidas();
+            Toast.makeText(this, "Carrito Eliminado!", Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("NO", (dialog, i) -> dialog.dismiss());
+        Dialog dialog = builder.create();
+        dialog.show();
+
+
     }
 
 }
