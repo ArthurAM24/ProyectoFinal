@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:padding="16dp">
 
     <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -34,27 +34,30 @@
 
                     <EditText
                         android:id="@+id/dialog_mesa"
-                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:hint="@string/ingrese_n_mero_de_mesa_dialog_carrito"
                         android:layout_marginStart="10dp"
+                        android:hint="@string/ingrese_n_mero_de_mesa_dialog_carrito"
+                        android:inputType="number"
                         android:text=""
+                        android:textColorHint="#78909C"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/dialog_cliente"
-                        android:inputType="textPersonName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:hint="@string/ingrese_nombre_del_cliente_dilog_carrito"
                         android:layout_marginStart="10dp"
+                        android:hint="@string/ingrese_nombre_del_cliente_dilog_carrito"
+                        android:inputType="textPersonName"
                         android:text=""
-                        android:textStyle="bold" />
+                        android:textColorHint="#78909C"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:autofillHints="" />
                 </LinearLayout>
 
             </LinearLayout>
