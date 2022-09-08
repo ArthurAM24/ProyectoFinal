@@ -87,7 +87,7 @@ public class ComidaDetalle extends AppCompatActivity {
             if (Common.isConnectedToInternet(getBaseContext()))
                 getDetalleComida(comidaID);
             else {
-                Toast.makeText(ComidaDetalle.this, "Porfavor revise su conexion!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ComidaDetalle.this, "Revise su conexion!", Toast.LENGTH_SHORT).show();
 
             }
         }

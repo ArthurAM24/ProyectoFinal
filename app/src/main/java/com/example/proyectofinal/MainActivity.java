@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             //Si usuario no existe
                             if (snapshot.child(txtCel.getText().toString()).exists()) {
+
                                 //Obtiene usuario
                                 mDialog.dismiss();
                                 Usuario user = snapshot.child(txtCel.getText().toString()).getValue(Usuario.class);
