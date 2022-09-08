@@ -95,7 +95,7 @@
             android:id="@+id/btn_cancelar"
             android:layout_height="60dp"
             android:backgroundTint="@color/blue"
-
+            android:layout_width="350dp"
             android:text="@string/btn_cancelar"
             android:textColor="@color/white" />
 

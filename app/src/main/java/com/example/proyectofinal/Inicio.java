@@ -109,7 +109,6 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
     }
 
-
     private void loadMenu() {
 
         adapter =
